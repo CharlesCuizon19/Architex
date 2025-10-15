@@ -13,7 +13,7 @@
     }
 
     .outlined-number {
-        -webkit-text-stroke: 1px #d1d5db;
+        -webkit-text-stroke: 1px white;
         /* Gray-300 stroke */
         color: transparent;
     }

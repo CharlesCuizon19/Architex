@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="relative bg-transparent">
+{{-- <nav x-data="{ open: false }" class="relative bg-transparent">
     <div class="flex items-center justify-between py-4 2xl:mr-[15rem] border-b-2 border-[#717171]/30">
         <!-- Logo -->
         <div class="flex items-center">
@@ -93,4 +93,4 @@
     </div>
 </nav>
 
-<script src="//unpkg.com/alpinejs" defer></script>
+<script src="//unpkg.com/alpinejs" defer></script> --}}

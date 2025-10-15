@@ -3,48 +3,42 @@
     'heroes' => [],
 ])
 
-@php
-    // Use Tailwind classes for width (w-full) instead of inline styles.
-    // Keep height conditional here.
-    $bannerHeight = $banner_type === 'home' ? '900px' : '550px';
-@endphp
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
 {{-- FIXED: Removed conditional width and set width via Tailwind class 'w-full' --}}
-<section class="w-full" style="height: {{ $bannerHeight }};">
-
-    <div class="relative">
+<section class="w-full mt-16 2xl:mt-0">
+    <div>
         <div>
-            <div class="absolute z-50 w-full">
-                <div class="container mx-auto">
-                    <x-layout.navbar />
-                </div>
-            </div>
-
             <div class="relative w-auto h-full 2xl:w-full swiper">
-                <div class="h-full swiper-wrapper">
+                <div class="absolute z-50 w-full">
+                    <div class="container mx-auto">
+                        {{-- <x-layout.navbar /> --}}
+                        <x-header2 />
+                    </div>
+                </div>
+                <div class="h-full swiper-wrapper ">
                     @foreach ($heroes as $hero)
-                        <div class="relative 2xl:h-full w-fit 2xl:w-full swiper-slide">
+                        <div class="relative w-auto 2xl:h-full 2xl:w-full swiper-slide">
                             @if (!empty($hero['video']))
-                                <div class="relative w-auto h-full 2xl:w-full">
+                                <div class="relative w-full h-full 2xl:w-full">
                                     <div>
-                                        <video autoplay loop muted playsinline class="object-cover w-full h-full">
+                                        <video autoplay loop muted class="object-cover w-full h-[30rem] 2xl:h-[55rem]">
                                             <source src="{{ asset($hero['video']) }}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         {{-- <img src="{{ asset('img/homepage/sample-banner.png') }}" alt=""
-                                            class="object-cover h-full"> --}}
+                                            class="object-cover w-full h-full"> --}}
                                     </div>
                                     <div class="absolute inset-0 z-50 h-full">
                                         <div {{-- Adjusted pl-[10rem] to use Tailwind's responsive grid/container approach, aligning content to the left of the main white section on the homepage --}}
-                                            class="flex flex-col justify-center h-full px-4 mx-auto space-y-8 max-w-screen-2xl sm:px-6 lg:px-8">
+                                            class="flex flex-col justify-center h-full px-4 mx-auto space-y-5 max-w-screen-2xl sm:px-6 lg:px-8">
 
                                             {{-- NOTE: For the homepage, the content needs to be positioned only within the white area (approx 75% of the screen). You may need to wrap this content in a w-3/4 or w-2/3 div if it still overflows the intended column. --}}
-                                            <h1 class="font-bold leading-tight text-green-900 text-7xl">
+                                            <h1 class="text-5xl font-bold leading-tight text-green-900 2xl:text-7xl">
                                                 {!! $hero['title'] !!}
                                             </h1>
-                                            <p class="w-1/2 mt-4 text-2xl text-green-900">{{ $hero['description'] }}</p>
+                                            <p class="w-1/2 mt-4 text-xl text-green-900">{{ $hero['description'] }}</p>
                                             @if (!empty($hero['button_text']))
                                                 <a href="{{ $hero['button_link'] ?? '#' }}"
                                                     class="px-6 py-3 mt-6 text-white bg-green-900 w-fit">
@@ -66,7 +60,7 @@
                                 <div
                                     class="absolute inset-0 z-20 bg-gradient-to-r from-white via-white/20 to-transparent">
                                 </div>
-                                <div class="h-full z-10 w-full bg-[#717171]/30 absolute inset-0"></div>
+                                <div class="h-full z-10 bg-[#717171]/30 absolute inset-0"></div>
                             @endif
                         </div>
                     @endforeach

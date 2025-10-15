@@ -1,4 +1,4 @@
-@props([
+{{-- @props([
 'image' => '',
 'category' => '',
 'date' => '',
@@ -23,21 +23,21 @@
 
             <!-- Category -->
             <div
-                class="flex items-center justify-center gap-2 w-1/2 text-center border-r border-gray-400 group-hover:border-gray-500">
-                <span class="mingcute--pencil-ruler-line text-base"></span>
+                class="flex items-center justify-center w-1/2 gap-2 text-center border-r border-gray-400 group-hover:border-gray-500">
+                <span class="text-base mingcute--pencil-ruler-line"></span>
                 <span>{{ $category }}</span>
             </div>
 
             <!-- Date -->
-            <div class="flex items-center justify-center gap-2 w-1/2 text-center">
-                <span class="la--calendar-solid text-base"></span>
+            <div class="flex items-center justify-center w-1/2 gap-2 text-center">
+                <span class="text-base la--calendar-solid"></span>
                 <span>{{ $date }}</span>
             </div>
         </div>
     </div>
 
     <!-- Content -->
-    <div class="p-5 text-center mt-6">
+    <div class="p-5 mt-6 text-center">
         <h3
             class="mb-3 font-semibold text-gray-800 text-lg transition-colors duration-300 group-hover:text-[#253e16]">
             {{ $title }}
@@ -47,4 +47,4 @@
             Read More →
         </a>
     </div>
-</div>
+</div> --}}

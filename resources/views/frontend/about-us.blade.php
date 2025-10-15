@@ -32,62 +32,97 @@
     </section> --}}
 
     <div>
-        <x-banner2 page="About Us" breadcrumb="About Us" />
+        <x-banner2 page="About Us" breadcrumb="About Us" img="img/about-us-banner.png" />
     </div>
 
-    <section class="relative w-full bg-[#f7f7f7] py-24 overflow-hidden">
+    <section class="relative w-full bg-[#f3f3f3] py-24 overflow-hidden">
 
-        <!-- Decorative Dotted Pattern -->
-        <div class="absolute left-0 transform -translate-y-1/2 top-1/2">
-            <img src="{{ asset('img/about-us/dot.png') }}" alt="pattern" class="w-64 h-auto opacity-40">
-        </div>
+        <div class="flex flex-col">
+            <div class="flex flex-col">
+                <div class="grid items-center grid-cols-2 md:grid-cols-3 mx-[5rem]">
+                    <div>
+                        <img src="{{ asset('img/about-us/Architex Japan Logo2.png') }}" alt="" class="h-auto w-[60%]">
+                    </div>
 
-        <!-- Content Wrapper -->
-        <div class="relative z-10 grid items-center max-w-screen-xl grid-cols-1 gap-12 px-6 mx-auto md:grid-cols-2">
+                    <div class="grid items-center justify-center grid-cols-1 gap-10">
+                        <img src="{{ asset('img/about-us/about us - who we are intro 1.png') }}"
+                            alt="Sanderiana Two Storey Single Detached" class="object-cover w-[80%] h-auto">
+                        <img src="{{ asset('img/about-us/about us - who we are intro 2.jpg') }}"
+                            alt="Sanderiana Two Storey Single Detached" class="object-cover w-[80%] h-auto">
+                    </div>
 
-            <!-- ✅ Left: Single Image -->
-            <div class="relative flex justify-center">
-                <img src="{{ asset('img/about-us/house.png') }}" alt="Sanderiana Two Storey Single Detached"
-                    class="object-cover w-full h-auto">
-            </div>
+                    <div class="col-span-3 space-y-6 md:col-span-1">
+                        <div>
+                            <p class="text-[#00721B] font-bold tracking-wide text-lg">Who We Are</p>
+                            <h2 class="text-3xl md:text-4xl font-semibold text-[#253e16] relative">
+                                <span
+                                    class="absolute text-[#253e16]/10 -top-5 text-5xl font-extrabold select-none text-outline opacity-20">
+                                    Who We Are
+                                </span>
+                                JOURNEY OF GROWTH
+                            </h2>
+                        </div>
 
-            <!-- ✅ Right: Text Content -->
-            <div class="space-y-6">
-                <div>
-                    <p class="text-[#00721B] font-bold tracking-wide text-lg">Who We Are</p>
-                    <h2 class="text-3xl md:text-4xl font-semibold text-[#253e16] relative">
-                        <span
-                            class="absolute text-[#253e16]/10 -top-5 text-5xl font-extrabold select-none text-outline opacity-20">
-                            Who We Are
-                        </span>
-                        CONSTRUCTION & DESIGN
-                    </h2>
+                        <p class="text-lg leading-relaxed text-justify text-gray-700">
+                            The origins of Architex Phil., Inc. can be traced back to Japan, where our founders built a
+                            solid
+                            reputation for providing affordable housing solutions for all life stages. Over the years,
+                            Architex
+                            Group has expanded to more than 37 offices across Osaka, Nagoya, and Tokyo, gaining the
+                            confidence
+                            of
+                            local communities with our dedication to quality, innovation, and integrity.
+                            <br> <br>
+                            With the same commitment, we bring this legacy to the Philippines, starting in Mindanao, fusing
+                            Japanese
+                            precision with Filipino creativity to build sustainable, people-centered communities and
+                            developments
+                            that elevate lives and contribute to a better future for communities around the world.
+
+                        </p>
+
+                        <!-- ✅ Bullet Points -->
+                        {{-- <ul class="mt-6 space-y-3">
+                            <li class="flex items-center gap-3">
+                                <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
+                                <span class="text-lg">Innovative & Sustainable Designs</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
+                                <span class="text-lg">Skilled and Experienced Team</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
+                                <span class="text-lg">Quality Materials & Workmanship</span>
+                            </li>
+                        </ul> --}}
+                    </div>
                 </div>
+                <div class="py-5 text-xl text-center opacity-50">
+                    Architex Office - Okazaki, Japan
+                </div>
+            </div>
+            <div class="container mx-auto">
+                <div class="bg-white p-16 border-l-[4px] border-[#253e16] w-auto mx-[5rem]">
+                    <div class="grid grid-cols-3 text-[#253e16] divide-x divide-solid divide-[#253e16]">
 
-                <p class="text-lg leading-relaxed text-gray-700">
-                    At Architex Phil., Inc., we go beyond construction and design—we create spaces that inspire, connect,
-                    and endure. Established with a passion for innovation and excellence, our company has grown into a
-                    trusted
-                    partner in architectural design, building solutions, and project management. Every project we undertake
-                    is
-                    guided by precision, sustainability, and a commitment to bringing our clients’ vision to life.
-                </p>
+                        <div class="space-y-3 text-center">
+                            <div class="text-5xl font-semibold counter" data-target="120">0+</div>
+                            <div class="text-lg">Projects Completed</div>
+                        </div>
 
-                <!-- ✅ Bullet Points -->
-                <ul class="mt-6 space-y-3">
-                    <li class="flex items-center gap-3">
-                        <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
-                        <span class="text-lg">Innovative & Sustainable Designs</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
-                        <span class="text-lg">Skilled and Experienced Team</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <img src="{{ asset('img/ico/check-icon.png') }}" alt="check" class="w-6 h-6">
-                        <span class="text-lg">Quality Materials & Workmanship</span>
-                    </li>
-                </ul>
+                        <div class="space-y-3 text-center">
+                            <div class="text-5xl font-semibold counter" data-target="15">0+</div>
+                            <div class="text-lg">Years of Experience</div>
+                        </div>
+
+                        <div class="space-y-3 text-center">
+                            <div class="text-5xl font-semibold counter" data-target="37">0+</div>
+                            <div class="text-lg">Offices</div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -351,15 +386,16 @@
         </div>
 
         <!-- Foreground mission image (right side, visible on top) -->
-        <div class="absolute inset-0 z-10 flex items-center justify-end">
-            <div class="w-full h-full bg-[url('/img/about-us/mission.png')] bg-contain bg-no-repeat bg-right opacity-90">
+        <div class="absolute inset-0 z-0 flex items-center justify-end">
+            <div
+                class="w-full h-full bg-[url('/img/about-us/mission.png')] bg-contain bg-no-repeat clip-path-diagonal bg-right opacity-90">
             </div>
         </div>
 
         <!-- Content -->
-        <div class="relative z-20 px-6 py-20 mx-auto max-w-screen-2xl">
+        <div class="relative z-0 px-6 mx-auto py-28 max-w-screen-2xl">
             <!-- Heading -->
-            <div class="relative mb-16">
+            <div class="container relative mx-auto mb-20 ml-[5rem]">
                 <!-- Background Outline Text -->
                 <h1
                     class="absolute inset-0 z-10 flex items-start justify-start text-6xl font-bold pointer-events-none select-none md:text-6xl stroke-text ">
@@ -368,110 +404,176 @@
 
                 <!-- Foreground Text -->
                 <p class="relative z-10 text-lg font-semibold">Mission & Vision</p>
-                <h2 class="text-4xl md:text-5xl font-bold text-[#45b700] relative z-10">
+                <h2 class="text-4xl md:text-5xl text-[#45b700] relative z-10">
                     Commitment to Excellence
                 </h2>
             </div>
 
 
             <!-- Mission and Vision Cards -->
-            <div class="relative z-20 grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div class="relative z-20 grid w-full grid-cols-2 gap-8 md:flex">
                 <!-- Mission -->
-                <div class="bg-white text-gray-900  relative border-b-[6px] border-[#ffe350] p-10">
-                    <div class="absolute -top-6 left-8 bg-[#2A441A] p-3 rounded-md">
+                <div class="bg-white text-gray-900  relative border-b-[6px] border-[#ffe350] pt-10 pb-5 px-10 md:w-[30%]">
+                    <div class="absolute -top-8 left-8 bg-[#00721b] p-5 ">
                         <img src="{{ asset('img/ico/mission-icon.png') }}" alt="Check Icon"
-                            class="object-contain w-6 h-6">
+                            class="object-contain w-5 h-5">
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-[#2A441A] uppercase">Our Mission</h3>
-                    <ul class="space-y-3 text-lg font-semibold leading-relaxed text-gray-700 list-disc list-inside">
-                        <li>To deliver modern, client-focused architectural, planning, and construction services with the
-                            highest standards of quality and craftsmanship.</li>
-                        <li>To combine Japanese precision with Filipino creativity, ensuring efficient, functional, and
-                            aesthetically driven designs.</li>
-                        <li>To foster long-term partnerships by consistently exceeding expectations and contributing to
-                            responsible urban development throughout the country.</li>
-                    </ul>
+                    <div class="leading-relaxed text-gray-700 text-md">
+                        To deliver innovative and sustainable architectural solutions that combine function, beauty, and
+                        quality, shaping spaces that add value to people and communities.
+                    </div>
                 </div>
 
                 <!-- Vision -->
-                <div class="bg-white text-gray-900 relative border-b-[6px] border-[#ffe350] p-10">
-                    <div class="absolute -top-6 left-8 bg-[#2A441A] p-3 rounded-md">
+                <div class="bg-white text-gray-900 relative border-b-[6px] border-[#ffe350] pt-10 pb-5 px-10 md:w-[30%]">
+                    <div class="absolute -top-8 left-8 bg-[#00721b] p-5">
                         <img src="{{ asset('img/ico/vision-icon.png') }}" alt="Check Icon"
-                            class="object-contain w-6 h-6">
+                            class="object-contain w-5 h-5">
                     </div>
-                    <h3 class="text-3xl font-bold mb-4 text-[#2A441A]">Our Vision</h3>
-                    <p class="text-lg font-semibold leading-relaxed text-gray-700">
-                        To be a leading architectural and design firm in the Philippines, delivering sustainable, inclusive,
-                        and high-quality housing solutions—from socialized to high-end—designed to uplift communities and
-                        enrich Filipino lives.
+                    <h3 class="text-3xl font-bold mb-4 text-[#2A441A] uppercase">Our Vision</h3>
+                    <p class="leading-relaxed text-gray-700 text-md">
+                        To be recognized as a leading architectural and construction partner in the Philippines, known for
+                        transforming ideas into lasting landmarks that stand the test of time.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    <section class="relative bg-[#f8f8f8] pt-20 pb-[20rem] overflow-hidden">
-
-        <div class="max-w-screen-xl px-6 mx-auto text-center">
-
-            <!-- ✅ Section Title -->
-            <div class="relative mb-16">
-                <!-- Background Text -->
-                <div
-                    class="absolute inset-x-0 z-0 text-6xl leading-none tracking-tight text-gray-400 select-none -top-1 md:text-7xl opacity-20 text-outline">
-                    Our Core Values
-                </div>
-                <p class="text-[#00721B] font-semibold uppercase tracking-wide">Our Core Values</p>
-                <h2 class="text-4xl md:text-5xl font-semibold text-[#253e16] relative inline-block mt-2">
-                    <span
-                        class="absolute inset-0 text-[#253e16]/10 text-6xl md:text-7xl font-extrabold select-none -z-10 -top-6">
-                        Our Core Values
-                    </span>
-                    CREATING RESPONSIBLY
-                </h2>
+    <div class="relative bg-[#f3f3f3]">
+        <div class="flex items-center justify-center w-full">
+            <div>
+                <img src="{{ asset('img/about-us/Architex Japan Logo.png') }}" alt=""
+                    class="object-cover object-left w-full h-screen ">
             </div>
-
-            <!-- ✅ Icons Row -->
-            <div class="grid grid-cols-1 gap-10 mb-12 sm:grid-cols-3 justify-items-center">
-                <!-- Integrity -->
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="w-14 h-14 flex items-center justify-center bg-[#00721B] rounded-sm shadow-lg">
-                        <img src="{{ asset('img/ico/integrity.png') }}" alt="Integrity Icon"
-                            class="object-contain w-15 h-15">
-                    </div>
-                    <h3 class="text-xl font-bold text-[#253e16] tracking-wide">INTEGRITY</h3>
-                </div>
-
-                <!-- Expertise -->
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="w-14 h-14 flex items-center justify-center bg-[#00721B] rounded-sm shadow-lg">
-                        <img src="{{ asset('img/ico/expertise.png') }}" alt="Expertise Icon"
-                            class="object-contain w-15 h-15">
-                    </div>
-                    <h3 class="text-xl font-bold text-[#253e16] tracking-wide">EXPERTISE</h3>
-                </div>
-
-                <!-- Leadership -->
-                <div class="flex flex-col items-center space-y-4">
-                    <div class="w-14 h-14 flex items-center justify-center bg-[#00721B] rounded-sm shadow-lg">
-                        <img src="{{ asset('img/ico/leadership.png') }}" alt="Leadership Icon"
-                            class="object-contain w-15 h-15">
-                    </div>
-                    <h3 class="text-xl font-bold text-[#253e16] tracking-wide">LEADERSHIP</h3>
-                </div>
-
-            </div>
-
-            <!-- ✅ Description -->
-            <p class="max-w-3xl mx-auto text-2xl leading-relaxed text-black">
-                Our expertise in estimating, construction, project management, and preconstruction services ensures that
-                our customers receive a quality product at a fair price and within a reasonable timeframe. This is
-                accomplished through the selective use of responsible subcontractors, hiring and retaining first-class
-                employees, and working for clients that share a belief in open, honest, and direct communication.
-            </p>
-
         </div>
-    </section>
+
+        <div class="absolute inset-0 top-[4rem] z-10">
+            <div class="text-center">
+                <!-- ✅ Section Title -->
+                <div class="relative mb-16">
+                    <div class="flex flex-col gap-3">
+                        <p class="text-[#00721B] font-semibold uppercase tracking-wide">Our Core Values</p>
+                        <h2 class="text-4xl md:text-5xl text-[#253e16] relative inline-block mt-2">
+                            CREATING RESPONSIBLY
+                        </h2>
+                    </div>
+                    <div
+                        class="absolute inset-x-0 z-0 text-6xl leading-none tracking-tight text-gray-400 select-none -top-1 md:text-7xl opacity-20 text-outline">
+                        Our Core Values
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute inset-0">
+            <div class="flex items-center justify-center w-full h-full text-center ">
+                <div class="container grid grid-cols-2 mx-auto md:grid-cols-3 gap-y-20">
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/expertise.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Quality
+                        </div>
+                        <div class="w-[80%]">
+                            Commited to excellence in design, materials, and craftsmanship to ensure lasting value.
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/leadership.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Integrity
+                        </div>
+                        <div class="w-[80%]">
+                            Building trust through transparency, profesisonalism, and ethical standards in every aspect of
+                            our work.
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/sustainability.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Sustainability
+                        </div>
+                        <div class="w-[80%]">
+                            Designing responsibility while balancing function, beauty, and the environments.
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/integrity.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Innovation
+                        </div>
+                        <div class="w-[80%]">
+                            Embracing new ideas, modern moethods, and sustainable practices to create designs that inspire.
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/collab.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Collaboration
+                        </div>
+                        <div class="w-[80%]">
+                            Working closely with clients, partners, and communities to bring visions to life.
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-5">
+                        <div>
+                            <img src="{{ asset('img/ico/precision.png') }}" alt="">
+                        </div>
+                        <div class="text-2xl font-semibold uppercase">
+                            Precision
+                        </div>
+                        <div class="w-[80%]">
+                            With focus to details, we uphold the highest standards in accuracy and execution.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100; // smaller = faster
+
+        counters.forEach(counter => {
+            const animate = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText.replace('+', '');
+
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment) + '+';
+                    setTimeout(animate, 80);
+                } else {
+                    counter.innerText = target + '+';
+                }
+            };
+
+            // Optional: start counting only when visible
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animate();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            observer.observe(counter);
+        });
+    </script>
 @endsection

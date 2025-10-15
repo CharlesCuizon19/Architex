@@ -1,201 +1,168 @@
 @extends('layouts.guest')
 
-@section('content')
 @php
-// 🟢 Page Title & Header Image
-$title = 'Apo Yama Residences';
-$image = 'img/properties/single-page.png';
-
-// 🟢 Hero Section Data
-$heroes = [[
-'title' => '',
-'description' => '',
-'button_text' => '',
-'button_link' => '#',
-'video' => '',
-'fallback_image' => 'img/services/page-header.png',
-]];
-
-// 🟢 Breadcrumbs
-$breadcrumbs = [
-'homepage' => 'Home',
-'properties' => 'Properties',
-'properties-single-page' => 'Apo Yama Residences',
-];
-
-// 🟢 Page Title for Banner Component
-$pageTitle = 'Services';
-
-// 🟢 Property Information
-$property = [
-'name' => 'Apo Yama Residences',
-'description_p1' => 'Offers a modern living experience designed with comfort, functionality, and elegance in mind. Each unit is thoughtfully crafted with spacious layouts, quality finishes, and a balance of style and practicality—perfect for families and individuals seeking a lasting home.',
-'description_p2' => 'Surrounded by accessible amenities and a vibrant community, it’s more than just a residence—it’s a place where convenience and contemporary living come together.',
-'button_text' => 'View Sitemap',
-'button_link' => '#sitemap-link',
-];
-
-// 🟢 Tabs
-$tabs = ['Overview', 'Sitemap', 'Amenities'];
-
-// 🟢 Gallery Images
-$images = [
-['src' => asset('img/properties/first.png'), 'alt' => 'Main View'],
-['src' => asset('img/properties/second.png'), 'alt' => 'Side View'],
-['src' => asset('img/properties/third.png'), 'alt' => 'Interior View 1'],
-['src' => asset('img/properties/fourth.png'), 'alt' => 'Interior View 2'],
-['src' => asset('img/properties/second.png'), 'alt' => 'Exterior Night View'],
-];
-
-// 🟢 Lots Information
-$lots = [
-['id' => 12, 'size' => '150 sqm', 'price' => '₱2,800,000', 'status' => 'Available', 'color' => 'bg-green-600'],
-['id' => 8, 'size' => '130 sqm', 'price' => '₱2,600,000', 'status' => 'Reserved', 'color' => 'bg-yellow-500'],
-['id' => 3, 'size' => '140 sqm', 'price' => '₱2,700,000', 'status' => 'Sold', 'color' => 'bg-red-500'],
-];
-
-// 🟢 Amenities
-$amenities = [
-['src' => asset('img/amenities/pool.png'), 'alt' => 'Swimming Pool'],
-['src' => asset('img/amenities/gym.png'), 'alt' => 'Fitness Gym'],
-['src' => asset('img/amenities/playground.png'), 'alt' => 'Children’s Playground'],
-];
+    $tabs = ['Overview', 'Sitemap', 'Amenities'];
+    $lots = [
+        ['id' => 12, 'size' => '150 sqm', 'price' => '₱2,800,000', 'status' => 'Available', 'color' => 'bg-green-600'],
+        ['id' => 8, 'size' => '130 sqm', 'price' => '₱2,600,000', 'status' => 'Reserved', 'color' => 'bg-yellow-500'],
+        ['id' => 3, 'size' => '140 sqm', 'price' => '₱2,700,000', 'status' => 'Sold', 'color' => 'bg-red-500'],
+    ];
 @endphp
 
-
-<!-- 🟢 Banner Section -->
-<section>
-    @include('components.banner', [
-    'banner_type' => 'other',
-    'heroes' => $heroes,
-    'breadcrumbs' => $breadcrumbs,
-    'pageTitle' => $pageTitle,
-    ])
-</section>
-
-<!-- 🟢 Page Header Image -->
-<section class="bg-white py-16 px-4 md:px-12">
-    <div class="max-w-screen-2xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#1E4D2B] mb-10">{{ $title }}</h2>
-        <div class="overflow-hidden shadow-md rounded-xl">
-            <img src="{{ asset($image) }}" alt="{{ $title }}" class="w-full h-auto object-cover">
-        </div>
+@section('content')
+    <!-- 🟢 Banner -->
+    <div>
+        <x-banner2 page="Property Details" breadcrumb="Properties" breadcrumb2="Apo Yama Residences"
+            link="{{ route('properties') }}" img="img/properties/page-header.png" />
     </div>
-</section>
 
-<!-- 🟢 Overview + Sitemap + Amenities Section -->
-<section class="pt-10 pb-[20rem] px-4 sm:px-6 lg:px-8">
-    <div
-        x-data="{
-            images: @js($images),
-            tabs: @js($tabs),
-            lots: @js($lots),
-            amenities: @js($amenities),
-            activeTab: '{{ $tabs[0] ?? 'Overview' }}',
-            activeIndex: 0,
-            activeLot: null,
-            amenityIndex: 0,
-
-            // Computed
-            get activeImage() { return this.images[this.activeIndex].src },
-            get activeAmenity() { return this.amenities[this.amenityIndex].src },
-
-            // Image Gallery
-            goToIndex(i) { this.activeIndex = i },
-            nextImage() { this.activeIndex = (this.activeIndex + 1) % this.images.length },
-            prevImage() { this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length },
-
-            // Amenities Gallery
-            goToAmenity(i) { this.amenityIndex = i },
-            nextAmenity() { this.amenityIndex = (this.amenityIndex + 1) % this.amenities.length },
-            prevAmenity() { this.amenityIndex = (this.amenityIndex - 1 + this.amenities.length) % this.amenities.length },
-
-            // Lots
-            selectLot(lot) { this.activeLot = lot },
-            resetLot() { this.activeLot = null }
-        }"
-        class="max-w-screen-2xl mx-auto">
-
-        <!-- Tabs -->
-        <div class="flex justify-center border-b border-gray-300 mb-12">
-            <template x-for="tab in tabs" :key="tab">
-                <button
-                    @click="activeTab = tab"
-                    :class="{ 
-                        'text-green-900 border-green-700': activeTab === tab, 
-                        'text-gray-500 hover:text-green-900 border-transparent': activeTab !== tab 
-                    }"
-                    class="pb-3 px-4 text-lg font-semibold border-b-2 transition duration-300">
-                    <span x-text="tab"></span>
-                </button>
-            </template>
+    <!-- 🟢 Header Image -->
+    <section class="px-4 py-16 bg-white md:px-12">
+        <div class="flex flex-col items-center justify-center mx-auto text-center max-w-screen-2xl">
+            <img src="{{ asset('img/properties/apo-yama logo.png') }}" alt="" class="h-auto w-[25rem]">
+            <h2 class="text-3xl md:text-2xl text-[#1E4D2B] mb-10">{{ $property->name }}</h2>
+            <div class="overflow-hidden shadow-md">
+                <img src="{{ asset($property->img) }}" alt="{{ $property->name }}" class="object-cover w-full h-auto">
+            </div>
         </div>
+    </section>
 
-        <!-- Overview -->
-        <div x-show="activeTab === 'Overview'" x-transition>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-                <!-- Left -->
-                <div class="lg:col-span-5 flex flex-col justify-center">
-                    <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property['name'] }}</h1>
-                    <p class="text-gray-700 mb-6 leading-relaxed text-lg">{{ $property['description_p1'] }}</p>
-                    <p class="text-gray-700 mb-8 leading-relaxed text-lg">{{ $property['description_p2'] }}</p>
 
-                    <a href="#"
-                        @click.prevent="activeTab = 'Sitemap'"
-                        class="relative w-fit px-6 py-3 text-white font-medium rounded-sm overflow-hidden 
-                              bg-green-900 group transition-all duration-300">
-                        <span class="relative z-10">{{ $property['button_text'] }}</span>
-                        <span class="absolute left-0 top-0 h-full w-0 bg-green-700 
-                                     transition-all duration-500 ease-in-out group-hover:w-full pointer-events-none"></span>
-                    </a>
-                </div>
+    <!-- 🟢 Tabs Section -->
+    <section class="pt-10 pb-[20rem] px-4 sm:px-6 lg:px-8" x-data="{
+        tabs: @js($tabs),
+        activeTab: 'Overview',
+    }">
+        <div class="mx-auto max-w-screen-2xl">
 
-                <!-- Right Gallery -->
-                <div class="lg:col-span-7">
-                    <div class="relative w-full aspect-video mb-4 bg-gray-200 overflow-hidden">
-                        <img :src="activeImage" :alt="images[activeIndex].alt"
-                            class="object-cover w-full h-full transition duration-300 ease-in-out">
+            <!-- Tabs -->
+            <div class="flex justify-center mb-12 border-b border-gray-300">
+                <template x-for="tab in tabs" :key="tab">
+                    <button @click="activeTab = tab"
+                        class="px-4 pb-3 text-lg font-semibold transition duration-300 border-b-2"
+                        :class="{
+                            'text-green-900 border-green-700': activeTab === tab,
+                            'text-gray-500 hover:text-green-900 border-transparent': activeTab !== tab
+                        }">
+                        <span x-text="tab"></span>
+                    </button>
+                </template>
+            </div>
 
-                        <div class="absolute inset-0 flex items-center justify-between p-4">
-                            <button @click="prevImage" class="text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                </svg>
-                            </button>
-                            <button @click="nextImage" class="text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </button>
+            <!-- 🟢 Overview Tab -->
+            <div x-show="activeTab === 'Overview'" x-transition>
+                <div>
+                    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+                        <!-- Left -->
+                        <div class="flex flex-col justify-center lg:col-span-5">
+                            <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property->name }}</h1>
+                            <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property->description }}</p>
+
+                            <a href="#"
+                                class="relative px-6 py-3 overflow-hidden font-medium text-white transition-all duration-300 bg-green-900 rounded-sm w-fit group">
+                                <span class="relative z-10">Reserve Now</span>
+                                <span
+                                    class="absolute top-0 left-0 w-0 h-full transition-all duration-500 ease-in-out bg-green-700 pointer-events-none group-hover:w-full"></span>
+                            </a>
                         </div>
-                    </div>
 
-                    <div x-show="images.length > 1" class="grid grid-cols-5 gap-3">
-                        <template x-for="(image, index) in images" :key="index">
-                            <div
-                                @click="goToIndex(index)"
-                                :class="{'border-4 border-yellow-400': index === activeIndex, 'border-transparent hover:border-yellow-400': index !== activeIndex}"
-                                class="rounded-lg overflow-hidden transition cursor-pointer">
-                                <img :src="image.src" :alt="image.alt" class="object-cover w-full h-full aspect-square">
+                        <!-- Right Gallery -->
+                        <div x-data="gallery({{ json_encode($property->images) }})" class="relative lg:col-span-7">
+                            <!-- Main Image Container -->
+                            <div class="relative w-full overflow-hidden bg-gray-200 aspect-video">
+                                <!-- Main Image -->
+                                <div class="relative w-full h-full group">
+                                    <template x-for="(image, index) in images" :key="index">
+                                        <img x-show="current === index" :src="'{{ asset('') }}' + image"
+                                            class="object-cover object-center w-full h-full transition-all duration-500 ease-in-out">
+                                    </template>
+
+                                    <!-- Navigation Arrows -->
+                                    <div class="absolute inset-0 flex items-center justify-between p-4">
+                                        <button @click="prev"
+                                            class="p-2 text-white transition rounded-full bg-black/50 hover:bg-black/70">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                                            </svg>
+                                        </button>
+                                        <button @click="next"
+                                            class="p-2 text-white transition rounded-full bg-black/50 hover:bg-black/70">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <!-- Hide/Show Button -->
+                                    <div
+                                        class="absolute bottom-0 z-20 transition ease-in-out transform -translate-x-1/2 translate-y-11 left-1/2 group-hover:-translate-y-[2px]">
+                                        <button @click="showThumbs = !showThumbs"
+                                            class="flex flex-col items-center gap-1 px-4 py-1 text-sm text-white transition">
+                                            <svg x-show="!showThumbs" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                            <svg x-show="showThumbs" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 15l7-7 7 7" />
+                                            </svg>
+                                            <span x-show="showThumbs">Hide All</span>
+                                            <span x-show="!showThumbs">Show All</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Thumbnails Overlay -->
+                                    <div x-show="!showThumbs" x-transition:enter="transition ease-in-out duration-300"
+                                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                        x-transition:leave="transition ease-in duration-200"
+                                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                        class="absolute bottom-0 z-10 grid w-full h-full grid-cols-5 gap-3 p-4 bg-gradient-to-t from-[#002B0A] to-transparent">
+                                        <template x-for="(image, index) in images" :key="index">
+                                            <div @click="current = index"
+                                                class="2xl:mt-[19rem] overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
+                                                :class="current === index ? 'border-yellow-400' : 'border-transparent'">
+                                                <img :src="'{{ asset('') }}' + image"
+                                                    class="object-cover w-full h-[6rem] aspect-square">
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
                             </div>
-                        </template>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Sitemap -->
-        <div x-show="activeTab === 'Sitemap'" x-transition>
-            <x-property.sitemap-view :lots="$lots" />
-        </div>
+            <!-- 🟢 Sitemap Tab -->
+            <div x-show="activeTab === 'Sitemap'" x-transition>
+                <x-property.sitemap-view :lots="$lots" />
+            </div>
 
-        <!-- Amenities -->
-        <div x-show="activeTab === 'Amenities'" x-transition>
-            @include('components.property.amenities', ['images' => $amenities])
+            <!-- 🟢 Amenities Tab -->
+            <div x-show="activeTab === 'Amenities'" x-transition>
+                @include('components.property.amenities', ['images' => $property->amenities])
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Alpine.js -->
-<script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>
+        function gallery(images) {
+            return {
+                images,
+                current: 0,
+                showThumbs: true,
+                next() {
+                    this.current = (this.current + 1) % this.images.length;
+                },
+                prev() {
+                    this.current = (this.current - 1 + this.images.length) % this.images.length;
+                }
+            };
+        }
+    </script>
 @endsection

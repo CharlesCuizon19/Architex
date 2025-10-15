@@ -27,7 +27,6 @@
 
 <body>
     @include('css.design')
-    
     <main>
         @yield('content')
     </main>
