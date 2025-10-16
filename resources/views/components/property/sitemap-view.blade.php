@@ -1,6 +1,6 @@
 @props([
     'lots' => [],
-    'floor_plan' => [],
+    'property' => [],
 ])
 
 <div x-data="{
@@ -71,6 +71,19 @@
                             }"
                             x-ref="lotContent">
 
+                            <button @click="resetLot()"
+                                class="flex items-center gap-1 font-semibold text-green-800 hover:underline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="m4 10l-.354.354L3.293 10l.353-.354zm16.5 8a.5.5 0 0 1-1 0zM8.646 15.354l-5-5l.708-.708l5 5zm-5-5.708l5-5l.708.708l-5 5zM4 9.5h10v1H4zM20.5 16v2h-1v-2zM14 9.5a6.5 6.5 0 0 1 6.5 6.5h-1a5.5 5.5 0 0 0-5.5-5.5z"
+                                        stroke-width="0.5" stroke="currentColor" />
+                                </svg>
+                                <div>
+                                    Back to Selection
+                                </div>
+                            </button>
+
                             <!-- Header -->
                             <div class="flex items-start justify-between">
                                 <div>
@@ -86,54 +99,9 @@
                                 </button>
                             </div>
 
-                            <!-- Rest of your lot content remains the same -->
                             <!-- 🖼️ Image Carousel -->
-                            <div x-data="{
-                                currentIndex: 0,
-                                images: [],
-                                prevImage() {
-                                    this.currentIndex = this.currentIndex === 0 ? this.images.length - 1 : this.currentIndex - 1;
-                                },
-                                nextImage() {
-                                    this.currentIndex = this.currentIndex === this.images.length - 1 ? 0 : this.currentIndex + 1;
-                                }
-                            }" x-ref="carousel" x-init="images = [activeLot.mainImage, ...activeLot.gallery]"
-                                class="relative w-full"
-                                x-effect="if (activeLot) images = [activeLot.mainImage, ...activeLot.gallery]">
-                                <!-- Main Image -->
-                                <img :src="images[currentIndex]" alt="Main Image"
-                                    class="object-cover w-full transition duration-500 ease-in-out h-80">
+                            <x-image-gallery :images="$property->house_details" />
 
-                                <!-- Left Arrow -->
-                                <button @click="prevImage"
-                                    class="absolute p-2 text-white transition -translate-y-1/2 bg-black bg-opacity-50 rounded-full top-1/2 left-4 hover:bg-opacity-70">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                    </svg>
-                                </button>
-
-                                <!-- Right Arrow -->
-                                <button @click="nextImage"
-                                    class="absolute p-2 text-white transition -translate-y-1/2 bg-black bg-opacity-50 rounded-full top-1/2 right-4 hover:bg-opacity-70">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </button>
-
-                                <!-- Thumbnails -->
-                                <div class="flex justify-center gap-2 mt-4 overflow-x-auto">
-                                    <template x-for="(img, i) in images" :key="i">
-                                        <img :src="img" @click="currentIndex = i"
-                                            :class="{
-                                                'border-4 border-green-600': i === currentIndex,
-                                                'border-2 border-transparent': i !== currentIndex
-                                            }"
-                                            class="object-cover w-20 h-20 transition rounded cursor-pointer hover:opacity-80">
-                                    </template>
-                                </div>
-                            </div>
 
                             <!-- Info Grid -->
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -169,10 +137,6 @@
                                 <h3 class="mb-2 text-lg font-semibold text-gray-800">Description</h3>
                                 <p class="leading-relaxed text-gray-700" x-text="activeLot.description"></p>
                             </div>
-
-                            <button @click="resetLot()" class="font-semibold text-green-800 hover:underline">
-                                ← Back to Selection
-                            </button>
                         </div>
                     </template>
 
@@ -208,81 +172,7 @@
 
                         <!-- Your existing floor plan content -->
                         <div class="flex-1">
-                            <div>
-                                <div x-data="gallery({{ json_encode($floor_plan->images) }})" class="relative z-10 lg:col-span-7">
-                                    <!-- Main Image Container -->
-                                    <div class="relative w-full overflow-hidden bg-gray-200 aspect-video">
-                                        <!-- Main Image -->
-                                        <div class="relative w-full h-full group">
-                                            <template x-for="(image, index) in images" :key="index">
-                                                <img x-show="current === index" :src="'{{ asset('') }}' + image"
-                                                    class="object-cover object-center w-full h-full transition-all duration-500 ease-in-out">
-                                            </template>
-
-                                            <!-- Navigation Arrows -->
-                                            <div class="absolute inset-0 flex items-center justify-between p-4">
-                                                <button @click="prev"
-                                                    class="p-2 text-white transition rounded-full bg-black/50 hover:bg-black/70">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                                    </svg>
-                                                </button>
-                                                <button @click="next"
-                                                    class="p-2 text-white transition rounded-full bg-black/70 hover:bg-black/70">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-
-                                            <!-- Hide/Show Button -->
-                                            <div
-                                                class="absolute bottom-0 z-20 transition ease-in-out transform -translate-x-1/2 translate-y-11 left-1/2 group-hover:-translate-y-[2px]">
-                                                <button @click="showThumbs = !showThumbs"
-                                                    class="flex flex-col items-center gap-1 px-4 py-1 text-sm text-white transition">
-                                                    <svg x-show="!showThumbs" xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                                        stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="3" d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                    <svg x-show="showThumbs" xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                                                        stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="3" d="M5 15l7-7 7 7" />
-                                                    </svg>
-                                                    <span x-show="showThumbs">Hide All</span>
-                                                    <span x-show="!showThumbs">Show All</span>
-                                                </button>
-                                            </div>
-
-                                            <!-- Thumbnails Overlay -->
-                                            <div x-show="!showThumbs"
-                                                x-transition:enter="transition ease-in-out duration-300"
-                                                x-transition:enter-start="opacity-0"
-                                                x-transition:enter-end="opacity-100"
-                                                x-transition:leave="transition ease-in duration-200"
-                                                x-transition:leave-start="opacity-100"
-                                                x-transition:leave-end="opacity-0"
-                                                class="absolute bottom-0 z-10 grid w-full h-full grid-cols-5 gap-3 p-4 bg-gradient-to-t from-[#002B0A] to-transparent">
-                                                <template x-for="(image, index) in images" :key="index">
-                                                    <div @click="current = index"
-                                                        class="2xl:mt-[15rem] overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
-                                                        :class="current === index ? 'border-yellow-400' : 'border-transparent'">
-                                                        <img :src="'{{ asset('') }}' + image"
-                                                            class="object-cover w-full h-[6rem] aspect-square">
-                                                    </div>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-image-gallery :images="$property->floor_plan" />
                         </div>
 
                         <!-- Floor plan info section -->
@@ -294,8 +184,7 @@
                             </div>
                             <div class="flex flex-col gap-4">
                                 <div class="text-sm font-bold">Description</div>
-                                <div x-text="activeLot?.description || 'Floor plan description'"
-                                    class="mb-2 text-base">
+                                <div x-text="activeLot?.description || 'Floor plan description'" class="mb-2 text-base">
                                 </div>
                                 <div class="text-sm font-bold">Highlights</div>
                                 <div x-text="activeLot?.highlights || ''"></div>

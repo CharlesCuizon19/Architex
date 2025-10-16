@@ -44,5 +44,21 @@
     });
 </script>
 
+<script>
+    function gallery(images) {
+        return {
+            images,
+            current: 0,
+            showThumbs: true,
+            next() {
+                this.current = (this.current + 1) % this.images.length;
+            },
+            prev() {
+                this.current = (this.current - 1 + this.images.length) % this.images.length;
+            },
+        };
+    }
+</script>
+
 
 </html>

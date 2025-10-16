@@ -1,4 +1,12 @@
-<div x-data="{ open: false, step: 1 }" x-cloak>
+<div x-data="{ open: false, step: 1 }" x-cloak x-init="$watch('open', value => {
+    if (value) {
+        document.body.classList.add('overflow-hidden');
+        document.documentElement.classList.add('overflow-hidden');
+    } else {
+        document.body.classList.remove('overflow-hidden');
+        document.documentElement.classList.remove('overflow-hidden');
+    }
+})">
     <!-- Trigger Button -->
     <button @click="open = true" class="bg-[#253e16] px-5 py-3 text-white">
         Reserve Now
@@ -31,8 +39,7 @@
                             Lot Details
                         </div>
                         <div class="flex gap-4 p-4 border rounded-b-md">
-                            <img src="/img/properties/sample.png" alt="Property"
-                                class="object-cover w-32 h-32 rounded-md">
+                            <img src="{{ asset($property->house) }}" alt="Property" class="object-cover w-32 h-32">
                             <div class="space-y-1 text-sm">
                                 <h3 class="font-bold text-lg text-[#1E4D2B]">SANDERIANA</h3>
                                 <p>Lot Selected: Block 5 Lot 12</p>
@@ -155,7 +162,8 @@
                     class="flex items-center justify-between px-6 py-4 border-t bg-gray-50">
                     <button @click="step = 1"
                         class="text-[#1E4D2B] font-medium flex items-center space-x-2 hover:underline">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 19l-7-7 7-7" />
                         </svg>

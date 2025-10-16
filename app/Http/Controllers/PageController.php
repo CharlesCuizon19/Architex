@@ -95,10 +95,22 @@ class PageController extends Controller
                     'img/amenities/gym.png',
                     'img/amenities/playground.png',
                 ],
-                'floorplan' => [
+                'floor_plan' => [
                     'img/floorplan1.png',
                     'img/floorplan2.png',
                 ],
+                'house' => 'img/house-detail1.png',
+                'house_details' => [
+                    'img/house-detail1.png',
+                    'img/house-detail2.png',
+                    'img/house-detail3.png',
+                    'img/house-detail4.png',
+                    'img/house-detail5.png',
+                ],
+                'size' => '150 sqm',
+                'price' => '₱2,800,000',
+                'status' => 'Available',
+
             ],
             (object) [
                 'id' => 2,
@@ -116,30 +128,15 @@ class PageController extends Controller
                     'img/amenities/gym.png',
                     'img/amenities/playground.png',
                 ],
-            ],
-        ];
-
-        $lots = [
-            (object)[
-                'id' => 1,
-                'size' => '150 sqm',
-                'price' => '₱2,800,000',
-                'status' => 'Available',
-                'color' => 'bg-green-600',
-            ],
-            (object)[
-                'id' => 2,
                 'size' => '130 sqm',
                 'price' => '₱2,600,000',
                 'status' => 'Reserved',
-                'color' => 'bg-yellow-500',
             ],
         ];
 
         $property = collect($properties)->firstWhere('id', $id);
-        $lot = collect($lots)->firstWhere('id', $id);
 
-        return view('frontend.properties-single-page', compact('property', 'lot'));
+        return view('frontend.properties-single-page', compact('property'));
     }
 
     public function rentals()

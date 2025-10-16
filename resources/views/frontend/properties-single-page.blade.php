@@ -59,12 +59,7 @@
                                 <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property->name }}</h1>
                                 <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property->description }}</p>
 
-                                <a href="#"
-                                    class="relative px-6 py-3 overflow-hidden font-medium text-white transition-all duration-300 bg-green-900 rounded-sm w-fit group">
-                                    <span class="relative z-10">Reserve Now</span>
-                                    <span
-                                        class="absolute top-0 left-0 w-0 h-full transition-all duration-500 ease-in-out bg-green-700 pointer-events-none group-hover:w-full"></span>
-                                </a>
+                                @include('components.reserveModal')
                             </div>
 
                             <!-- Right Gallery -->
@@ -142,7 +137,7 @@
 
                 <!-- 🟢 Sitemap Tab -->
                 <div x-show="activeTab === 'Sitemap'" x-transition>
-                    <x-property.sitemap-view :lots="$lots" :floor_plan="$property" />
+                    <x-property.sitemap-view :lots="$lots" :property="$property" />
                 </div>
 
                 <!-- 🟢 Amenities Tab -->
