@@ -35,4 +35,14 @@
     @yield('data')
 </body>
 
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('reserveModal', {
+            open: false,
+            step: 1
+        });
+    });
+</script>
+
+
 </html>

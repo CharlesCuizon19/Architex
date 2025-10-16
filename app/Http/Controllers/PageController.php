@@ -95,6 +95,10 @@ class PageController extends Controller
                     'img/amenities/gym.png',
                     'img/amenities/playground.png',
                 ],
+                'floorplan' => [
+                    'img/floorplan1.png',
+                    'img/floorplan2.png',
+                ],
             ],
             (object) [
                 'id' => 2,
