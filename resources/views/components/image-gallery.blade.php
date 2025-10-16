@@ -1,3 +1,8 @@
+@props([
+    'flag' => '',
+    'images' => '',
+])
+
 <div>
     <div x-data="gallery({{ json_encode($images) }})" class="relative z-10 lg:col-span-7">
         <!-- Main Image Container -->
@@ -51,7 +56,7 @@
                     class="absolute bottom-0 z-10 grid w-full h-full grid-cols-5 gap-3 p-4 bg-gradient-to-t from-[#002B0A] to-transparent">
                     <template x-for="(image, index) in images" :key="index">
                         <div @click="current = index"
-                            class="2xl:mt-[15rem] overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
+                            class="{{ $flag === 'Amenities' ? '2xl:mt-[5rem]' : '2xl:mt-[15rem]' }} overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
                             :class="current === index ? 'border-yellow-400' : 'border-transparent'">
                             <img :src="'{{ asset('') }}' + image"
                                 class="object-cover w-full h-[6rem] aspect-square">

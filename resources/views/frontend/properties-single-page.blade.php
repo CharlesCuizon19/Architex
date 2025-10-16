@@ -2,11 +2,6 @@
 
 @php
     $tabs = ['Overview', 'Sitemap', 'Amenities'];
-    $lots = [
-        ['id' => 12, 'size' => '150 sqm', 'price' => '₱2,800,000', 'status' => 'Available', 'color' => 'bg-green-600'],
-        ['id' => 8, 'size' => '130 sqm', 'price' => '₱2,600,000', 'status' => 'Reserved', 'color' => 'bg-yellow-500'],
-        ['id' => 3, 'size' => '140 sqm', 'price' => '₱2,700,000', 'status' => 'Sold', 'color' => 'bg-red-500'],
-    ];
 @endphp
 
 @section('content')
@@ -21,9 +16,10 @@
         <section class="px-4 py-16 md:px-12">
             <div class="flex flex-col items-center justify-center mx-auto text-center max-w-screen-2xl">
                 <img src="{{ asset('img/properties/apo-yama logo.png') }}" alt="" class="h-auto w-[25rem]">
-                <h2 class="text-3xl md:text-2xl text-[#1E4D2B] mb-10">{{ $property->name }}</h2>
+                <h2 class="text-3xl md:text-2xl text-[#1E4D2B] mb-10">{{ $property['name'] }}</h2>
                 <div class="overflow-hidden shadow-md">
-                    <img src="{{ asset($property->img) }}" alt="{{ $property->name }}" class="object-cover w-full h-auto">
+                    <img src="{{ asset($property['img']) }}" alt="{{ $property['name'] }}"
+                        class="object-cover w-full h-auto">
                 </div>
             </div>
         </section>
@@ -56,14 +52,13 @@
                         <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
                             <!-- Left -->
                             <div class="flex flex-col justify-center lg:col-span-5">
-                                <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property->name }}</h1>
-                                <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property->description }}</p>
-
+                                <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property['name'] }}</h1>
+                                <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property['description'] }}</p>
                                 @include('components.reserveModal')
                             </div>
 
                             <!-- Right Gallery -->
-                            <div x-data="gallery({{ json_encode($property->images) }})" class="relative lg:col-span-7">
+                            <div x-data="gallery({{ json_encode($property['images']) }})" class="relative lg:col-span-7">
                                 <!-- Main Image Container -->
                                 <div class="relative w-full overflow-hidden bg-gray-200 aspect-video">
                                     <!-- Main Image -->
@@ -142,7 +137,7 @@
 
                 <!-- 🟢 Amenities Tab -->
                 <div x-show="activeTab === 'Amenities'" x-transition>
-                    @include('components.property.amenities', ['images' => $property->amenities])
+                    <x-image-gallery :images="$allAmenities" flag="Amenities" />
                 </div>
             </div>
         </section>

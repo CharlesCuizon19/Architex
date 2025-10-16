@@ -39,7 +39,7 @@
                             Lot Details
                         </div>
                         <div class="flex gap-4 p-4 border rounded-b-md">
-                            <img src="{{ asset($property->house) }}" alt="Property" class="object-cover w-32 h-32">
+                            <img src="{{ asset($property['house']) }}" alt="Property" class="object-cover w-32 h-32">
                             <div class="space-y-1 text-sm">
                                 <h3 class="font-bold text-lg text-[#1E4D2B]">SANDERIANA</h3>
                                 <p>Lot Selected: Block 5 Lot 12</p>
@@ -87,13 +87,15 @@
 
                 <!-- Step 1 Footer -->
                 <div x-show="step === 1" x-transition
-                    class="flex items-center justify-between px-6 py-4 border-t bg-gray-50">
+                    class="flex items-center justify-between px-6 py-5 border-t bg-gray-50">
                     <button @click="open = false"
                         class="text-[#1E4D2B] font-medium flex items-center space-x-2 hover:underline">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m4 10l-.354.354L3.293 10l.353-.354zm16.5 8a.5.5 0 0 1-1 0zM8.646 15.354l-5-5l.708-.708l5 5zm-5-5.708l5-5l.708.708l-5 5zM4 9.5h10v1H4zM20.5 16v2h-1v-2zM14 9.5a6.5 6.5 0 0 1 6.5 6.5h-1a5.5 5.5 0 0 0-5.5-5.5z"
+                                stroke-width="0.5" stroke="currentColor" />
                         </svg>
-                        <span>Cancel Reservation</span>
+                        <div>Cancel Reservation</div>
                     </button>
 
                     <button @click="step = 2" class="bg-[#1E4D2B] text-white px-6 py-2 rounded-md hover:bg-[#16381f]">
@@ -162,10 +164,10 @@
                     class="flex items-center justify-between px-6 py-4 border-t bg-gray-50">
                     <button @click="step = 1"
                         class="text-[#1E4D2B] font-medium flex items-center space-x-2 hover:underline">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 19l-7-7 7-7" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m4 10l-.354.354L3.293 10l.353-.354zm16.5 8a.5.5 0 0 1-1 0zM8.646 15.354l-5-5l.708-.708l5 5zm-5-5.708l5-5l.708.708l-5 5zM4 9.5h10v1H4zM20.5 16v2h-1v-2zM14 9.5a6.5 6.5 0 0 1 6.5 6.5h-1a5.5 5.5 0 0 0-5.5-5.5z"
+                                stroke-width="0.5" stroke="currentColor" />
                         </svg>
                         <span>Back to Step 1</span>
                     </button>

@@ -78,7 +78,7 @@ class PageController extends Controller
     public function propertiesSinglePage($id)
     {
         $properties = [
-            (object) [
+            [
                 'id' => 1,
                 'name' => 'Apo Yama Residences',
                 'img' => 'img/properties/single-page.png',
@@ -112,7 +112,7 @@ class PageController extends Controller
                 'status' => 'Available',
 
             ],
-            (object) [
+            [
                 'id' => 2,
                 'name' => 'Sasa Area',
                 'img' => 'img/properties/second.png',
@@ -128,15 +128,138 @@ class PageController extends Controller
                     'img/amenities/gym.png',
                     'img/amenities/playground.png',
                 ],
+                'floor_plan' => [
+                    'img/floorplan1.png',
+                    'img/floorplan2.png',
+                ],
+                'house' => 'img/house-detail1.png',
+                'house_details' => [
+                    'img/house-detail1.png',
+                    'img/house-detail2.png',
+                    'img/house-detail3.png',
+                    'img/house-detail4.png',
+                    'img/house-detail5.png',
+                ],
                 'size' => '130 sqm',
                 'price' => '₱2,600,000',
                 'status' => 'Reserved',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Awhag Area',
+                'img' => 'img/properties/third.png',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                'images' => [
+                    'img/rental-img1.png',
+                    'img/rental-img2.png',
+                    'img/rental-img3.png',
+                    'img/rental-img4.png',
+                ],
+                'amenities' => [
+                    'img/amenities/pool.png',
+                    'img/amenities/gym.png',
+                    'img/amenities/playground.png',
+                ],
+                'floor_plan' => [
+                    'img/floorplan1.png',
+                    'img/floorplan2.png',
+                ],
+                'house' => 'img/house-detail1.png',
+                'house_details' => [
+                    'img/house-detail1.png',
+                    'img/house-detail2.png',
+                    'img/house-detail3.png',
+                    'img/house-detail4.png',
+                    'img/house-detail5.png',
+                ],
+                'size' => '140 sqm',
+                'price' => '₱2,700,000',
+                'status' => 'Sold',
+            ],
+        ];
+
+        $lots = [
+            [
+                'id' => 1,
+                'name' => 'SANDERIANA',
+                'size' => '150 sqm',
+                'price' => '₱2,800,000',
+                'status' => 'Available',
+                'type' => 'Single Detached',
+                'category' => 'Residential Lot',
+                'address' => 'Road Lot 3, Block 5 Lot 1, Apo Yama Residences',
+                'description' => 'Block 4 Lot 1 is conveniently located near the main road with easy access 
+                to community features. Perfect for families seeking a modern and secure neighborhood.',
+                'highlights' => 'Total of 4 Bedrooms (including guest room)',
+                'house_details' => [
+                    'img/house-detail1.png',
+                    'img/house-detail2.png',
+                    'img/house-detail3.png',
+                    'img/house-detail4.png',
+                    'img/house-detail5.png',
+                ],
+                'amenities' => [
+                    'img/amenities/pool.png',
+                    'img/amenities/gym.png',
+                    'img/amenities/playground.png',
+                ],
+            ],
+            [
+                'id' => 2,
+                'name' => 'Lorem',
+                'size' => '130 sqm',
+                'price' => '₱2,600,000',
+                'status' => 'Reserved',
+                'type' => 'Single Detached',
+                'category' => 'Residential Lot',
+                'address' => 'Road Lot 3, Block 5 Lot 2, Apo Yama Residences',
+                'description' => 'Block 5 Lot 2 is conveniently located near the main road with easy access 
+                to community features. Perfect for families seeking a modern and secure neighborhood.',
+                'highlights' => 'Total of 3 Bedrooms',
+                'house_details' => [
+                    'img/rental-img1.png',
+                    'img/rental-img2.png',
+                    'img/rental-img3.png',
+                    'img/rental-img4.png',
+                ],
+                'amenities' => [
+                    'img/amenities/pool.png',
+                    'img/amenities/gym.png',
+                    'img/amenities/playground.png',
+                ],
+            ],
+            [
+                'id' => 3,
+                'name' => 'Ipsum',
+                'size' => '140 sqm',
+                'price' => '₱2,700,000',
+                'status' => 'Sold',
+                'type' => 'Single Detached',
+                'category' => 'Residential Lot',
+                'address' => 'Road Lot 3, Block 5 Lot 3, Apo Yama Residences',
+                'description' => 'Block 6 Lot 3 is conveniently located near the main road with easy access 
+                to community features. Perfect for families seeking a modern and secure neighborhood.',
+                'highlights' => 'Total of 4 Bedrooms (including guest room)',
+                'house_details' => [
+                    'img/house-detail1.png',
+                    'img/house-detail2.png',
+                    'img/house-detail3.png',
+                    'img/house-detail4.png',
+                    'img/house-detail5.png',
+                ],
+                'amenities' => [
+                    'img/amenities/pool.png',
+                    'img/amenities/gym.png',
+                    'img/amenities/playground.png',
+                ],
             ],
         ];
 
         $property = collect($properties)->firstWhere('id', $id);
 
-        return view('frontend.properties-single-page', compact('property'));
+        $allAmenities = collect($lots)->pluck('amenities')->flatten()->unique()->values();
+
+        return view('frontend.properties-single-page', compact('property', 'lots', 'allAmenities'));
     }
 
     public function rentals()
