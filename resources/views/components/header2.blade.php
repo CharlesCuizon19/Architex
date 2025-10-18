@@ -29,8 +29,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('properties') }}"
-                    class="{{ Route::is('properties') || Route::is('properties-single-page') ? 'text-[#00721B] font-bold' : 'hover:text-[#00721B]' }}">
+                <a href="{{ route('properties.show') }}"
+                    class="{{ Route::is('properties.*') ? 'text-[#00721B] font-bold' : 'hover:text-[#00721B]' }}">
                     Properties
                 </a>
             </li>
@@ -81,8 +81,8 @@
             <li><a href="{{ route('about-us') }}"
                     class="block w-full {{ request()->routeIs('about-us') ? 'text-[#00721B]' : 'hover:text-[#00721B]' }}">About
                     Us</a></li>
-            <li><a href="{{ route('properties') }}"
-                    class="block w-full {{ request()->routeIs('properties') ? 'text-[#00721B]' : 'hover:text-[#00721B]' }}">Properties</a>
+            <li><a href="{{ route('properties.show') }}"
+                    class="block w-full {{ request()->routeIs('properties.*') ? 'text-[#00721B]' : 'hover:text-[#00721B]' }}">Properties</a>
             </li>
             <li><a href="{{ route('services') }}"
                     class="block w-full {{ request()->routeIs('services') ? 'text-[#00721B]' : 'hover:text-[#00721B]' }}">Services</a>

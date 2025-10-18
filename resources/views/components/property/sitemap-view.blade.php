@@ -61,7 +61,7 @@
                             }"
                             x-ref="lotContent">
 
-                            <button @click="resetLot()"
+                            {{-- <button @click="resetLot()"
                                 class="flex items-center gap-1 font-semibold text-green-800 hover:underline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -72,13 +72,20 @@
                                 <div>
                                     Back to Selection
                                 </div>
-                            </button>
+                            </button> --}}
 
                             <!-- Header -->
                             <div class="flex items-start justify-between">
                                 <div>
                                     <h2 class="text-3xl font-bold text-[#1E4D2B]" x-text="activeLot.name"></h2>
-                                    <p class="mt-1 text-gray-600" x-text="activeLot.address"></p>
+                                    <div class="flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 12 12" class="text-[#1E4D2B]">
+                                            <path fill="currentColor"
+                                                d="M6 .5A4.5 4.5 0 0 1 10.5 5c0 1.863-1.42 3.815-4.2 5.9a.5.5 0 0 1-.6 0C2.92 8.815 1.5 6.863 1.5 5A4.5 4.5 0 0 1 6 .5m0 3a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3" />
+                                        </svg>
+                                        <p class="mt-1 text-gray-600" x-text="activeLot.address"></p>
+                                    </div>
                                     <span
                                         class="inline-block px-4 py-1 mt-3 text-sm font-medium text-yellow-800 bg-yellow-100 rounded-full"
                                         x-text="activeLot.type"></span>
@@ -90,7 +97,7 @@
                             </div>
 
                             <div>
-                                <div x-data="gallery([])" x-init="$watch('activeLot', value => {
+                                <div x-data="gallery2([])" x-init="$watch('activeLot', value => {
                                     if (value && value.house_details) {
                                         galleryComponent.house_details = value.house_details;
                                         galleryComponent.current = 0;
@@ -157,7 +164,8 @@
                                                 x-transition:leave-start="opacity-100"
                                                 x-transition:leave-end="opacity-0"
                                                 class="absolute bottom-0 z-10 grid w-full h-full grid-cols-5 gap-3 p-4 bg-gradient-to-t from-[#002B0A] to-transparent">
-                                                <template x-for="(image, index) in images" :key="index">
+                                                <template x-for="(image, index) in house_details"
+                                                    :key="index">
                                                     <div @click="current = index"
                                                         class="2xl:mt-[15rem] overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
                                                         :class="current === index ? 'border-yellow-400' : 'border-transparent'">
@@ -213,7 +221,7 @@
                     </template>
 
                     <!-- Floor Plan Div - Slides over when button clicked -->
-                    <div class="relative z-10 flex flex-col w-full h-full gap-5 transition-all duration-500 ease-in-out bg-white"
+                    <div class="relative z-10 flex flex-col w-full h-full gap-5 bg-white"
                         :class="{
                             'translate-x-full opacity-0 pointer-events-none hidden': !showFloorPlan,
                             'translate-x-0 opacity-100': showFloorPlan
@@ -275,11 +283,13 @@
                 <!-- Clickable lots -->
                 <template x-for="(lot, index) in lots" :key="index">
                     <div @click="selectLot(lot)"
-                        :class="[lot.color,
-                            'absolute w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold cursor-pointer transition transform hover:scale-110'
+                        :class="[
+                            lot.color,
+                            'absolute w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold cursor-pointer transition transform hover:scale-110 '
                         ]"
                         :style="'top:' + (30 + index * 15) + '%; left:' + (35 + index * 10) + '%;'" x-text="lot.id">
                     </div>
+
                 </template>
             </div>
         </div>
@@ -287,7 +297,7 @@
 </div>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('gallery', (initialImages = []) => ({
+        Alpine.data('gallery2', (initialImages = []) => ({
             house_details: initialImages,
             current: 0,
             showThumbs: true,

@@ -9,7 +9,6 @@
     <section class="w-full bg-[#f3f3f3] pt-20 pb-[20rem]">
         <div class="container mx-auto">
             <div class="container grid grid-cols-1 gap-20 px-6 mx-auto lg:grid-cols-3">
-
                 <!-- Left Content -->
                 <div class="lg:col-span-2">
                     <!-- Featured Image -->
@@ -48,7 +47,7 @@
                 </div>
 
                 <!-- Right Sidebar -->
-                <div class="space-y-14">
+                <div class="grid grid-cols-2 space-y-14 md:grid-cols-1">
                     <div class="space-y-5">
                         <h3 class="mb-4 text-xl font-semibold text-green-700">Latest Posts</h3>
                         @foreach ($recentBlogs as $item)
@@ -90,7 +89,7 @@
             </div>
 
             <div class="grid grid-cols-3 gap-20">
-                <div class="col-span-2 mt-10">
+                <div class="col-span-3 mt-10 md:col-span-2">
                     <div class="container mx-auto">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-semibold text-green-700">You Might Also Like</h3>

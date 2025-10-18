@@ -1,41 +1,12 @@
 @extends('layouts.guest')
 
 @section('content')
-    @php
-        $blogs = [
-            (object) [
-                'id' => 1,
-                'image' => 'img/blogs-img1.png',
-                'category' => 'Materials',
-                'date' => '2025-01-10',
-                'title' => 'Steel Fabrication: Strength Behind Every Structure',
-            ],
-            (object) [
-                'id' => 2,
-                'image' => 'img/blogs-img2.png',
-                'category' => 'Architect',
-                'date' => '2025-01-10',
-                'title' => 'Smart Spaces: The Future of Modern Living',
-            ],
-            (object) [
-                'id' => 3,
-                'image' => 'img/blogs-img3.png',
-                'category' => 'Design',
-                'date' => '2025-01-10',
-                'title' => 'Designing Exteriors that Inspire Productivity',
-            ],
-        ];
-    @endphp
-
     <div>
         <x-banner2 page="Latest Blogs" breadcrumb="Blogs" img="img/blog-banner.png" />
     </div>
 
-    <section id="blogs" class="bg-[#e8e8e8] pt-20 pb-[20rem]">
-        <div class="p-5 text-center">
-
-        </div>
-        <div class="grid max-w-screen-xl grid-cols-1 gap-8 px-6 mx-auto md:grid-cols-3">
+    <section class="bg-[#e8e8e8] pt-20 pb-[20rem]">
+        <div class="grid max-w-screen-xl grid-cols-2 gap-8 px-6 mx-auto md:grid-cols-3">
             @foreach ($blogs as $item)
                 <div
                     class="group bg-white rounded-sm shadow-sm hover:shadow-md transition overflow-visible border-b-4 border-transparent hover:border-[#253e16] duration-300">

@@ -36,7 +36,6 @@
     </div>
 
     <section class="relative w-full bg-[#f3f3f3] py-24 overflow-hidden">
-
         <div class="flex flex-col">
             <div class="flex flex-col">
                 <div class="grid items-center grid-cols-2 md:grid-cols-3 mx-[5rem]">
@@ -127,9 +126,274 @@
         </div>
     </section>
 
+    <div class="h-full bg-[#f3f3f3]">
+        <div class="flex flex-col items-center justify-center gap-10 ">
+            <div class="relative flex items-center justify-center w-auto text-[#253e16] container mx-auto">
+                <div class="text-[#253e16]/10 -top-5 text-7xl select-none text-outline opacity-20">
+                    Highlighting
+                </div>
+
+                <div class="absolute inset-0">
+                    <div class="flex flex-col items-center justify-center w-full gap-3">
+                        <div class="text-lg font-semibold text-[#3d9251]">
+                            Highlighting
+                        </div>
+                        <div class="text-4xl font-medium uppercase">
+                            Architex japan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-[60%] text-center text-lg container mx-auto">
+                Architex Japan continues to redefine modern living by combining timeless Japanese craftsmanship
+                with innovative architectural solutions. With more than 37 offices across Okazaki, Nagoya, and Tokyo,
+                the company leads in designing, building, and managing sustainable communities that embody
+                comfort, efficiency, and harmony.
+            </div>
+
+            <div class="container grid w-full mx-auto mt-10 md:grid-cols-3">
+                <div class="flex flex-row items-center justify-center w-full gap-16 md:flex-col">
+                    <img src="{{ asset('img/architex-fun.png') }}" alt="" class="w-auto h-32">
+                    <a href="https://architex.jp/portfolio/#p65" class="flex items-center gap-3" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="text-xl">
+                            Visit Website
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M7 7h10m0 0v10m0-10L7 17" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex flex-row items-center justify-center w-full gap-16 md:flex-col">
+                    <img src="{{ asset('img/architex-home.png') }}" alt="" class="w-auto h-32">
+                    <a href="https://architex.jp/portfolio/#p76" class="flex items-center gap-3" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="text-xl">
+                            Visit Website
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M7 7h10m0 0v10m0-10L7 17" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex flex-row items-center justify-center w-full gap-16 md:flex-col">
+                    <img src="{{ asset('img/architex-dev.png') }}" alt="" class="w-auto h-32">
+                    <a href="https://architex.jp/portfolio/#p125" class="flex items-center gap-3" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="text-xl">
+                            Visit Website
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M7 7h10m0 0v10m0-10L7 17" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-[#f3f3f3] h-full pt-28">
+        <div class="relative z-10">
+            <div class="grid h-full grid-cols-1 mx-20 md:grid-cols-3">
+                <div class="bg-[#d9d9d9] col-span-1 h-[40rem]">
+
+                </div>
+                <div class="col-span-2">
+                    <div class="max-w-5xl px-6 py-12 mx-auto text-gray-800">
+                        <h2 class="mb-8 text-2xl text-[#253E16] md:text-3xl">What We Do in Japan?</h2>
+
+                        <!-- 1. Custom Home Building -->
+                        <div class="mb-10">
+                            <h3 class="mb-2 text-lg font-semibold md:text-xl">1. Custom Home Building (注文住宅事業)</h3>
+                            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                                <li>A team of <strong>architects, coordinators, exterior planners, and advisors</strong>
+                                    work hand-in-hand with clients to bring their dream homes to life.</li>
+                                <li>Unlike traditional approaches, Architex ensures architects lead the entire process —
+                                    from <strong>land search and financial planning to design, structure, interiors, and
+                                        garden layouts</strong> — guaranteeing a seamless and personalized home-building
+                                    journey.</li>
+                                <li>Special focus is given to <strong>simplicity and functionality</strong>, removing waste
+                                    and unnecessary cost while delivering timeless design and comfort.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 2. Renovation & Remodeling -->
+                        <div class="mb-10">
+                            <h3 class="mb-2 text-lg font-semibold md:text-xl">2. Renovation & Remodeling (リフォーム・リノベーション)
+                            </h3>
+                            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                                <li>Architex breathes new life into existing homes through <strong>renovations, extensions,
+                                        and maintenance</strong>.</li>
+                                <li>Our goal is to ensure homes evolve with the needs of families, remaining efficient,
+                                    comfortable, and modern.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. Real Estate & Development -->
+                        <div class="mb-10">
+                            <h3 class="mb-2 text-lg font-semibold md:text-xl">3. Real Estate & Development
+                                (不動産・ディベロップメント事業)</h3>
+                            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                                <li>Architex develops <strong>“ARCHITEX Town”</strong> residential communities—subdivided
+                                    land projects designed with consistent architectural style and reliable infrastructure.
+                                </li>
+                                <li>We also manage <strong>rental housing, property sales, brokerage, and
+                                        consulting</strong>, helping clients maximize the value of their assets.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 4. Housing Brands & Partnerships -->
+                        <div>
+                            <h3 class="mb-2 text-lg font-semibold md:text-xl">4. Housing Brands & Partnerships</h3>
+                            <p class="mb-2">Architex Japan offers multiple house brands to suit different lifestyles and
+                                budgets, including:</p>
+                            <ul class="space-y-2 text-gray-700 list-disc list-inside">
+                                <li><strong>ARCASA Order Homes</strong> – Flexible, client-centered designs with high
+                                    performance.</li>
+                                <li><strong>SIMPLE</strong> – Minimalist, cost-efficient homes focusing on practical beauty.
+                                </li>
+                                <li><strong>Kanal Home</strong> – Transparent “all-in pricing” homes with a balance of
+                                    design and affordability.</li>
+                                <li><strong>niko and … EDIT HOUSE</strong> – A collaboration with lifestyle brand <em>niko
+                                        and …</em>, blending fashion and living for unique home experiences.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <img src="{{ asset('img/about-us/Architex Japan Logo.png') }}" alt=""
+                class="absolute -bottom-[4rem] -left-[12rem] -z-10 w-auto h-[55rem]">
+        </div>
+    </div>
+
+    <div class="bg-[#f3f3f3] h-full pb-20 pt-5">
+        <div class="flex flex-col-reverse mx-20 md:grid md:grid-cols-3">
+            <div class="relative z-10 col-span-2">
+                <div class="max-w-5xl px-6 py-12 mx-auto text-gray-800">
+                    <h2 class="text-2xl md:text-4xl font-medium text-[#253E16] mb-6">
+                        How We Connect with the Community
+                    </h2>
+
+                    <p class="mb-6 text-lg">
+                        For Architex, building a house is
+                        <strong>not the end—it’s the beginning.</strong>
+                    </p>
+
+                    <ul class="space-y-3 text-lg leading-relaxed text-gray-700 list-disc list-inside">
+                        <li>
+                            Through the <strong>Architex Community</strong>, we remain by our clients’ side
+                            even after handing over their homes.
+                        </li>
+                        <li>
+                            We support families through different life events, offering solutions to their
+                            “it would be nice if…” and “I wish we could…” needs.
+                        </li>
+                        <li>
+                            With the <strong>Architex Fun App</strong>, we engage homeowners with maintenance
+                            reminders, lifestyle tips, exclusive events, and loyalty benefits — ensuring
+                            peace of mind, comfort, and happiness for years to come.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-[#d9d9d9] h-[30rem]">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-[#f9f9f9] h-full pt-28 pb-44">
+        <div class="relative h-full">
+            <div class="container flex flex-col items-center justify-center mx-auto">
+                <div class="md:w-[60%]">
+                    <div class="relative flex items-center justify-center w-auto text-[#253e16] container mx-auto mb-3">
+                        <div class="text-[#253e16]/10 -top-5 text-7xl select-none text-outline opacity-20">
+                            Our Philosophy
+                        </div>
+
+                        <div class="absolute inset-0">
+                            <div class="flex flex-col items-center justify-center w-full gap-3">
+                                <div class="text-lg font-semibold text-[#3d9251]">
+                                    Our Philosophy
+                                </div>
+                                <div class="text-4xl font-medium uppercase">
+                                    Driven by innovation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="max-w-5xl px-6 py-12 mx-auto text-lg leading-relaxed text-justify text-gray-800">
+                            <!-- Intro paragraph -->
+                            <p class="mb-8">
+                                At Architex, we believe in more than just building houses — we build
+                                <strong>living spaces that inspire security, comfort, and joy.</strong>
+                                By combining Japanese precision, design innovation, and community-centered service,
+                                we continuously create value for homeowners and partners alike.
+                            </p>
+
+                            <!-- Section heading -->
+                            <h2 class="text-2xl md:text-3xl font-medium text-[#253E16] mb-6">
+                                How We Connect with the Community
+                            </h2>
+
+                            <!-- Paragraphs -->
+                            <p class="mb-5">
+                                At Architex, we believe building a home is only the beginning of our relationship with our
+                                clients.
+                            </p>
+
+                            <p class="mb-5">
+                                Through the <strong>Architex Community</strong>, we continue to support families even after
+                                their
+                                home
+                                is handed over. Whether it’s a new life event or a change in lifestyle, we provide solutions
+                                that
+                                make
+                                everyday living easier and more enjoyable.
+                            </p>
+
+                            <p class="mb-8">
+                                We created an app called <strong>Architex Fun App</strong>, where homeowners can access
+                                helpful
+                                tools
+                                and services, such as maintenance reminders, lifestyle tips, exclusive events, and special
+                                rewards.
+                                This ongoing support ensures every Architex home remains a place of comfort, security, and
+                                lasting
+                                happiness.
+                            </p>
+
+                            <!-- Learn More button -->
+                            <a href="#"
+                                class="inline-block bg-[#253E16] text-white px-6 py-3 rounded-sm hover:bg-[#1e3412] transition-colors">
+                                Learn More
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute top-0 hidden md:flex left-20">
+                <img src="{{ asset('img/our-philo-img1.png') }}" alt="">
+            </div>
+            <div class="hidden md:flex absolute -bottom-[8rem] right-20">
+                <img src="{{ asset('img/our-philo-img2.png') }}" alt="">
+            </div>
+        </div>
+    </div>
 
     <!--History Section-->
-    <section class="relative w-full py-20 overflow-hidden bg-white md:py-32">
+    {{-- <section class="relative w-full py-20 overflow-hidden bg-white md:py-32">
 
         <!-- Main Content Wrapper -->
         <div class="relative z-10 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -370,7 +634,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Mission & Vision Section -->
     <section class="relative bg-[#1E3B15] text-white overflow-hidden">
@@ -380,16 +644,13 @@
             <div
                 class="absolute right-0 top-0 w-1/2 h-full bg-[url('/img/about-us/vision-bg.jpg')] bg-cover bg-center clip-path-diagonal opacity-90">
             </div>
-            <div
-                class="w-full h-full bg-[url('/img/about-us/bg-mission.png')] bg-contain bg-no-repeat bg-left mix-blend-multiply ">
-            </div>
+            <img src="{{ asset('img/about-us/bg-mission.png') }}" alt=""
+                class="bg-left bg-no-repeat bg-contain mix-blend-multiply ">
         </div>
 
         <!-- Foreground mission image (right side, visible on top) -->
-        <div class="absolute inset-0 z-0 flex items-center justify-end">
-            <div
-                class="w-full h-full bg-[url('/img/about-us/mission.png')] bg-contain bg-no-repeat clip-path-diagonal bg-right opacity-90">
-            </div>
+        <div class="absolute inset-0 flex items-center justify-end border">
+            <img src="{{ asset('img/about-us/mission.png') }}" alt="" class="w-auto h-full">
         </div>
 
         <!-- Content -->
@@ -441,7 +702,7 @@
         </div>
     </section>
 
-    <div class="relative bg-[#f3f3f3]">
+    <div class="relative bg-[#f3f3f3] h-full border border-black pb-[20rem] pt-[10rem] md:pb-0 md:pt-0">
         <div class="flex items-center justify-center w-full">
             <div>
                 <img src="{{ asset('img/about-us/Architex Japan Logo.png') }}" alt=""
@@ -541,6 +802,12 @@
             </div>
         </div>
     </div>
+
+    <style>
+        li {
+            margin-left: 20px;
+        }
+    </style>
 
     <script>
         const counters = document.querySelectorAll('.counter');
