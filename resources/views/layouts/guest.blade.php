@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Home') | Architex</title>
-
-    <script src="https://cdn.tailwindcss.com" defer></script>
     <script src="https://unpkg.com/lucide@latest" defer></script>
 
     {{-- Swiper CSS --}}
