@@ -6,15 +6,6 @@
         // Example heroes data (you can make this dynamic too)
         $heroes = [
             [
-                'title' => 'Innovation in <br> Every Design 123',
-                'description' =>
-                    'We create architectural solutions that blend functionality, sustainability, and aesthetics—shaping modern environments that inspire and endure.',
-                'button_text' => 'Explore Properties',
-                'button_link' => '/properties',
-                'video' => 'img/homepage/family1.mp4',
-                'fallback_image' => 'assets/images/banners/BANNER_1.png',
-            ],
-            [
                 'title' => 'Innovation in <br> Every Design',
                 'description' =>
                     'We create architectural solutions that blend functionality, sustainability, and aesthetics—shaping modern environments that inspire and endure.',
