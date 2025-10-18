@@ -2,11 +2,6 @@
 
 @php
     $tabs = ['Overview', 'Sitemap', 'Amenities'];
-    $lots = [
-        ['id' => 12, 'size' => '150 sqm', 'price' => '₱2,800,000', 'status' => 'Available', 'color' => 'bg-green-600'],
-        ['id' => 8, 'size' => '130 sqm', 'price' => '₱2,600,000', 'status' => 'Reserved', 'color' => 'bg-yellow-500'],
-        ['id' => 3, 'size' => '140 sqm', 'price' => '₱2,700,000', 'status' => 'Sold', 'color' => 'bg-red-500'],
-    ];
 @endphp
 
 @section('content')
@@ -14,16 +9,17 @@
     <div class="bg-[#f3f3f3]">
         <div>
             <x-banner2 page="Property Details" breadcrumb="Properties" breadcrumb2="Apo Yama Residences"
-                link="{{ route('properties') }}" img="img/properties/page-header.png" />
+                link="{{ route('properties.show') }}" img="img/properties/page-header.png" />
         </div>
 
         <!-- 🟢 Header Image -->
         <section class="px-4 py-16 md:px-12">
             <div class="flex flex-col items-center justify-center mx-auto text-center max-w-screen-2xl">
                 <img src="{{ asset('img/properties/apo-yama logo.png') }}" alt="" class="h-auto w-[25rem]">
-                <h2 class="text-3xl md:text-2xl text-[#1E4D2B] mb-10">{{ $property->name }}</h2>
+                <h2 class="text-3xl md:text-2xl text-[#1E4D2B] mb-10">{{ $property['name'] }}</h2>
                 <div class="overflow-hidden shadow-md">
-                    <img src="{{ asset($property->img) }}" alt="{{ $property->name }}" class="object-cover w-full h-auto">
+                    <img src="{{ asset($property['img']) }}" alt="{{ $property['name'] }}"
+                        class="object-cover w-full h-auto">
                 </div>
             </div>
         </section>
@@ -53,84 +49,18 @@
                 <!-- 🟢 Overview Tab -->
                 <div x-show="activeTab === 'Overview'" x-transition>
                     <div>
-                        <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+                        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
                             <!-- Left -->
-                            <div class="flex flex-col justify-center lg:col-span-5">
-                                <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property->name }}</h1>
-                                <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property->description }}</p>
-
-                                @include('components.reserveModal')
+                            <div class="flex flex-col justify-center">
+                                <h1 class="text-4xl font-bold text-[#537746] mb-6">{{ $property['name'] }}</h1>
+                                <p class="mb-6 text-lg leading-relaxed text-gray-700">{{ $property['description'] }}</p>
+                                <button class="bg-[#253e16] px-5 py-3 text-white w-fit" @click="activeTab = 'Sitemap'">
+                                    Reserve Now
+                                </button>
                             </div>
 
                             <!-- Right Gallery -->
-                            <div x-data="gallery({{ json_encode($property->images) }})" class="relative lg:col-span-7">
-                                <!-- Main Image Container -->
-                                <div class="relative w-full overflow-hidden bg-gray-200 aspect-video">
-                                    <!-- Main Image -->
-                                    <div class="relative w-full h-full group">
-                                        <template x-for="(image, index) in images" :key="index">
-                                            <img x-show="current === index" :src="'{{ asset('') }}' + image"
-                                                class="object-cover object-center w-full h-full transition-all duration-500 ease-in-out">
-                                        </template>
-
-                                        <!-- Navigation Arrows -->
-                                        <div class="absolute inset-0 flex items-center justify-between p-4">
-                                            <button @click="prev"
-                                                class="p-2 text-white transition rounded-full bg-black/50 hover:bg-black/70">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                                </svg>
-                                            </button>
-                                            <button @click="next"
-                                                class="p-2 text-white transition rounded-full bg-black/50 hover:bg-black/70">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </button>
-                                        </div>
-
-                                        <!-- Hide/Show Button -->
-                                        <div
-                                            class="absolute bottom-0 z-20 transition ease-in-out transform -translate-x-1/2 translate-y-11 left-1/2 group-hover:-translate-y-[2px]">
-                                            <button @click="showThumbs = !showThumbs"
-                                                class="flex flex-col items-center gap-1 px-4 py-1 text-sm text-white transition">
-                                                <svg x-show="!showThumbs" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                        d="M19 9l-7 7-7-7" />
-                                                </svg>
-                                                <svg x-show="showThumbs" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                        d="M5 15l7-7 7 7" />
-                                                </svg>
-                                                <span x-show="showThumbs">Hide All</span>
-                                                <span x-show="!showThumbs">Show All</span>
-                                            </button>
-                                        </div>
-
-                                        <!-- Thumbnails Overlay -->
-                                        <div x-show="!showThumbs" x-transition:enter="transition ease-in-out duration-300"
-                                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                                            x-transition:leave="transition ease-in duration-200"
-                                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                            class="absolute bottom-0 z-10 grid w-full h-full grid-cols-5 gap-3 p-4 bg-gradient-to-t from-[#002B0A] to-transparent">
-                                            <template x-for="(image, index) in images" :key="index">
-                                                <div @click="current = index"
-                                                    class="2xl:mt-[19rem] overflow-hidden transition border-2 border-yellow-400 cursor-pointer h-fit hover:opacity-80"
-                                                    :class="current === index ? 'border-yellow-400' : 'border-transparent'">
-                                                    <img :src="'{{ asset('') }}' + image"
-                                                        class="object-cover w-full h-[6rem] aspect-square">
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-image-gallery :images="$property['images']" />
                         </div>
                     </div>
                 </div>
@@ -142,7 +72,7 @@
 
                 <!-- 🟢 Amenities Tab -->
                 <div x-show="activeTab === 'Amenities'" x-transition>
-                    @include('components.property.amenities', ['images' => $property->amenities])
+                    <x-image-gallery :images="$allAmenities" flag="Amenities" />
                 </div>
             </div>
         </section>

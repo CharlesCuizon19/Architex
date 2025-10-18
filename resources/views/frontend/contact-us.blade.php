@@ -42,7 +42,7 @@
             <div class="relative z-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
 
                 {{-- ✅ LEFT COLUMN: Contact Form (w-2/3) --}}
-                <div class="p-8 bg-white rounded-lg shadow-xl lg:w-2/3">
+                <div class="p-8 rounded-lg lg:w-2/3">
                     <form action="#" method="POST" class="space-y-6">
                         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                             <div>
@@ -80,7 +80,7 @@
                         </div>
                         <div>
                             <button type="submit"
-                                class="inline-flex justify-center py-3 px-8 border border-transparent rounded-md shadow-sm text-base font-medium text-black bg-[#ffd601] hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+                                class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base text-black bg-[#ffd601] hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
                                 Send Message
                             </button>
                         </div>
@@ -88,7 +88,7 @@
                 </div>
 
                 {{-- ✅ RIGHT COLUMN: Contact Details (w-1/3) --}}
-                <div class="p-6 bg-white rounded-lg shadow-xl lg:w-1/2 lg:p-10">
+                <div class="p-6 rounded-lg lg:w-1/2 lg:p-10">
                     <div class="space-y-8">
                         {{-- Note: Ensure your asset paths and image sizes (w-10 h-10) are correct --}}
                         {{-- ... (Contact details content with <img> tags) ... --}}
@@ -96,7 +96,7 @@
                         <div class="flex items-start gap-4">
                             <span class="flex-shrink-0">
                                 <img src="{{ asset('img/contact-us/location-icon.png') }}" alt="Location icon"
-                                    class="w-10 h-10 mt-1">
+                                    class="w-16 h-auto mt-1">
                             </span>
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900">Address</h3>
@@ -109,7 +109,7 @@
                         <div class="flex items-start gap-4">
                             <span class="flex-shrink-0">
                                 <img src="{{ asset('img/contact-us/phone-icon.png') }}" alt="Phone icon"
-                                    class="w-10 h-10 mt-1">
+                                    class="w-16 h-auto mt-1">
                             </span>
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900">Phone</h3>
@@ -119,7 +119,7 @@
                         <div class="flex items-start gap-4">
                             <span class="flex-shrink-0">
                                 <img src="{{ asset('img/contact-us/email-icon.png') }}" alt="Email icon"
-                                    class="w-10 h-10 mt-1">
+                                    class="w-16 h-auto mt-1">
                             </span>
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900">Email</h3>

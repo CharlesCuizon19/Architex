@@ -13,7 +13,8 @@
 
     <!-- Newsletter -->
     <div class="max-w-screen-xl mx-auto -mt-52 ">
-        <div class="bg-[#253e16] text-white shadow-lg grid md:grid-cols-2 gap-0 items-stretch overflow-hidden">
+        <div
+            class="bg-[#253e16] text-white shadow-lg flex flex-col-reverse md:grid md:grid-cols-2 gap-0 items-stretch overflow-hidden">
             <!-- Text -->
             <div class="flex flex-col justify-center p-10">
                 <h2 class="mb-6 text-4xl font-semibold">Subscribe to Newsletter!</h2>
@@ -22,19 +23,19 @@
                     our newsletter keeps you updated on everything that shapes the future of modern spaces.
                 </p>
                 <!-- Wider form -->
-                <form class="flex w-full lg:w-full">
+                <form class="flex w-full gap-1 lg:w-full">
                     <input type="email" placeholder="Enter your email address"
-                        class="w-full p-3 text-black rounded-l-md focus:outline-none">
+                        class="w-full py-4 px-3 text-black focus:outline-none placeholder:text-[#253e16]">
                     <button type="submit"
-                        class="px-6 py-3 font-semibold bg-yellow-400 rounded-r-md hover:bg-yellow-500">
+                        class="text-nowrap px-6 py-3 bg-[#ffd601] hover:bg-yellow-500 text-[#253e16]">
                         Subscribe Now
                     </button>
                 </form>
             </div>
             <!-- Full Image -->
-            <div class="flex items-end justify-end">
+            <div class="flex items-end justify-end max-h-[25rem]">
                 <img src="{{ asset('img/footer/newsletter.png') }}" alt="Newsletter"
-                    class="object-cover object-right h-full w-100">
+                    class="object-cover object-right w-full h-auto md:w-100">
             </div>
         </div>
     </div>
@@ -68,17 +69,23 @@
             <div>
                 <h3 class="mb-4 text-2xl font-bold text-black">QUICK LINKS</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('homepage') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Home</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('about-us') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             About Us</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('properties.show') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Properties</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('services') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Services</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('blogs.show') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Blogs</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('contactUs') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Contact Us</a></li>
                 </ul>
             </div>
@@ -87,12 +94,9 @@
             <div>
                 <h3 class="mb-4 text-2xl font-bold text-black">PROPERTIES</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
+                    <li><a href="{{ route('properties.show') }}"
+                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
                             Apo Yama Residences</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Singao Residences</a></li>
-                    <li><a href="#" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Mateo Residences</a></li>
                 </ul>
             </div>
 
@@ -103,17 +107,17 @@
                     <li class="flex items-start gap-2">
                         <img src="{{ asset('img/footer/location.png') }}" alt="Location" class="w-6 h-6 mt-1">
                         <span class="text-lg font-semibold">
-                            Door 102, API Building, Block 8 Lot 15, Talisay St., Awhag Subd., Brgy. 19-B, Davao City,
-                            Davao del Sur, Phil., 8000
+                            Door 7, Josie 1944 Commercial Bldg., E. Palma Gil St., Obrero, Brgy. 13-B, Davao City,
+                            Philippines
                         </span>
                     </li>
                     <li class="flex items-center gap-2">
                         <img src="{{ asset('img/footer/phone.png') }}" alt="Phone" class="w-6 h-6">
-                        <span class="text-lg font-semibold">(082) 299 2390</span>
+                        <span class="text-lg font-semibold">0927 725 7326</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <img src="{{ asset('img/footer/email.png') }}" alt="Email" class="w-6 h-6">
-                        <span class="text-lg font-semibold">architexphilinc@gmail.com</span>
+                        <span class="text-lg font-semibold">info@architexphil.com</span>
                     </li>
                 </ul>
             </div>

@@ -31,7 +31,7 @@
             <!-- 2x2 Grid Layout -->
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
                 @foreach ($properties as $item)
-                    <a href="{{ route('properties-single-page', ['id' => $item->id]) }}"
+                    <a href="{{ route('properties.single-page', ['id' => $item->id]) }}"
                         class="relative block h-auto col-span-2 overflow-hidden shadow-md group">
 
                         <img src="{{ asset($item->image) }}" alt="Project {{ $item->title }}"

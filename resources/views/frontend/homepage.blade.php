@@ -132,7 +132,7 @@
     </section>
 
     <!-- About Company Section -->
-    <section class="relative bg-[#e8e8e8] py-20 px-3">
+    <section class="relative bg-[#f3f3f3] py-20 px-3">
         <!-- Background Image with Multiply Blend (Left Side Only) -->
         <div class="absolute inset-y-0 left-0 w-[45vw] md:w-[35vw] lg:w-[15vw] overflow-hidden">
             <img src="{{ asset('img/homepage/about-us.png') }}" alt="Background Design"
@@ -201,18 +201,19 @@
             <div class="space-y-10">
                 <x-service-card title="Property for Sale"
                     description="Invest in a property built to last. Our homes and spaces are crafted with durability, style, and value in mind, giving you the opportunity to own a place that matches both your lifestyle and future goals."
-                    button-text="See All For Sale" button-link="{{ route('properties') }}" image="img/homepage/sale.png" />
+                    button-text="See All For Sale" button-link="{{ route('properties.show') }}"
+                    image="img/homepage/sale.png" />
 
                 <x-service-card title="Property for Rent"
                     description="Flexible housing and property options designed for modern living. Our rental units offer comfort, convenience, and functionality—perfect for families, professionals, and businesses seeking quality spaces without long-term commitment."
-                    button-text="See All For Rent" button-link="{{ route('properties') }}" image="img/homepage/rent.png"
-                    :reverse="true" />
+                    button-text="See All For Rent" button-link="{{ route('properties.show') }}"
+                    image="img/homepage/rent.png" :reverse="true" />
             </div>
         </div>
     </section>
 
     <!-- Feature Properties Section-->
-    <section class="py-20 bg-[#e8e8e8] overflow-hidden relative">
+    <section class="py-20 bg-[#f3f3f3] overflow-hidden relative">
         <div class="relative z-0 mb-12 text-center">
             <p class="mb-3 text-2xl font-bold tracking-wide text-green-700">Featured Properties</p>
             <h2 class="text-4xl font-bold text-[#253e16]">SHOWCASING OUR WORK</h2>
@@ -254,7 +255,7 @@
 
 
     <!-- Blogs Section -->
-    <section id="blogs" class="relative w-full pt-20 pb-[20rem] bg-[#e8e8e8]">
+    <section id="blogs" class="relative w-full pt-20 pb-[20rem] bg-[#f3f3f3]">
         <div class="relative z-0 max-w-screen-xl mx-auto">
             <!-- Section Header -->
             <div class="relative z-0 px-6 mx-auto max-w-screen-2xl">
@@ -275,7 +276,7 @@
 
                     <!-- Right Side (Button) -->
                     <div class="mt-6 md:mt-0">
-                        <a href="#"
+                        <a href="{{ route('blogs.show') }}"
                             class="inline-block px-6 py-3 font-semibold text-white transition bg-green-900 rounded-sm hover:bg-green-700">
                             See All Blogs
                         </a>
@@ -284,55 +285,54 @@
             </div>
 
             <!-- Swiper Wrapper -->
-            <div class="relative px-6">
-                <!-- Swiper Container -->
-                <div class="swiper blog-swiper">
-                    <div class="swiper-wrapper">
-                        <!-- Blog Slides -->
-                        <div class="swiper-slide">
-                            <x-blog-carousel image="img/blogs/blog1.jpg" category="Materials" date="Jun 04, 2025"
-                                title="Steel Fabrication: Strength Behind Every Structure" link="#" />
-                        </div>
-                        <div class="swiper-slide">
-                            <x-blog-carousel image="img/blogs/blog2.jpg" category="Architect" date="Mar 21, 2025"
-                                title="Smart Spaces: The Future of Modern Living" link="#" />
-                        </div>
-                        <div class="swiper-slide">
-                            <x-blog-carousel image="img/blogs/blog3.jpg" category="Design" date="Feb 12, 2025"
-                                title="Designing Exteriors that Inspire Productivity" link="#" />
-                        </div>
-                        <div class="swiper-slide">
-                            <x-blog-carousel image="img/blogs/blog3.jpg" category="Design" date="Feb 12, 2025"
-                                title="Designing Exteriors that Inspire Productivity" link="#" />
-                        </div>
-                        <div class="swiper-slide">
-                            <x-blog-carousel image="img/blogs/blog3.jpg" category="Design" date="Feb 12, 2025"
-                                title="Designing Exteriors that Inspire Productivity" link="#" />
-                        </div>
-                    </div>
-                </div>
+            <section class="bg-transparent pt-20 pb-[10rem]">
+                <div class="grid max-w-screen-xl grid-cols-1 gap-8 px-6 mx-auto md:grid-cols-3">
+                    @foreach ($blogs as $item)
+                        <div
+                            class="group bg-white rounded-sm shadow-sm hover:shadow-md transition overflow-visible border-b-4 border-transparent hover:border-[#253e16] duration-300">
 
-                <!-- Swiper Navigation Buttons -->
-                <div class="absolute inset-0 z-20 flex items-center justify-between px-2 pointer-events-none md:px-4">
-                    <!-- Prev Button -->
-                    <button
-                        class="z-30 flex items-center justify-center w-10 h-10 text-white transition bg-green-900 rounded-full shadow-md pointer-events-auto blog-swiper-button-prev hover:bg-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                        </svg>
-                    </button>
+                            <!-- Image Wrapper -->
+                            <div class="relative w-full h-64 overflow-hidden">
+                                <img src="{{ asset($item->image) }}" alt="{{ $item->title }}"
+                                    class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105">
+                            </div>
 
-                    <!-- Next Button -->
-                    <button
-                        class="z-30 flex items-center justify-center w-10 h-10 text-white transition bg-green-900 rounded-full shadow-md pointer-events-auto blog-swiper-button-next hover:bg-green-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                            stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                        </svg>
-                    </button>
+                            <!-- Category & Date Bar -->
+                            <div class="relative z-20 flex justify-center">
+                                <div
+                                    class="absolute -top-5 bg-[#f3f3f3] text-[#253e16] text-sm px-2 py-3 flex items-center justify-between gap-2 shadow-lg w-[90%] max-w-md border border-gray-200 
+                    transition-all duration-300 group-hover:bg-[#253e16] group-hover:text-white group-hover:border-[#253e16]">
+
+                                    <!-- Category -->
+                                    <div
+                                        class="flex items-center justify-center w-1/2 gap-2 text-center border-r border-gray-400 group-hover:border-gray-500">
+                                        <span class="text-base mingcute--pencil-ruler-line"></span>
+                                        <span>{{ $item->category }}</span>
+                                    </div>
+
+                                    <!-- Date -->
+                                    <div class="flex items-center justify-center w-1/2 gap-2 text-center">
+                                        <span class="text-base la--calendar-solid"></span>
+                                        <span>{{ \Carbon\Carbon::parse($item->date)->format('F d, Y') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-5 mt-6 text-center">
+                                <h3
+                                    class="mb-3 font-semibold text-gray-800 text-lg transition-colors duration-300 group-hover:text-[#253e16]">
+                                    {{ $item->title }}
+                                </h3>
+                                <a href="{{ route('blogs.details', ['id' => $item->id]) }}"
+                                    class="inline-block mt-2 text-[#253e16] font-medium hover:text-green-600 transition border-b border-b-[#253e16]">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
+            </section>
         </div>
     </section>
 
