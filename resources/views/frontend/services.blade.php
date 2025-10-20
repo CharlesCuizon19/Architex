@@ -42,7 +42,8 @@
             <div class="space-y-10">
                 <x-service-card title="Property for Sale"
                     description="Invest in a property built to last. Our homes and spaces are crafted with durability, style, and value in mind, giving you the opportunity to own a place that matches both your lifestyle and future goals."
-                    button-text="See All For Sale" button-link="{{ route('properties') }}" image="img/homepage/sale.png" />
+                    button-text="See All For Sale" button-link="{{ route('properties.show') }}"
+                    image="img/homepage/sale.png" />
 
                 <x-service-card title="Property for Rent"
                     description="Flexible housing and property options designed for modern living. Our rental units offer comfort, convenience, and functionality—perfect for families, professionals, and businesses seeking quality spaces without long-term commitment."

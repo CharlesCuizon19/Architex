@@ -19,7 +19,13 @@
     }
 
     .clip-diagonal {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        clip-path: none;
+    }
+
+    @media (min-width: 768px) {
+        .clip-diagonal {
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        }
     }
 
     @keyframes scroll-left {
