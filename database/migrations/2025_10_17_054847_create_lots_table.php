@@ -21,8 +21,7 @@ return new class extends Migration
             $table->decimal('price', 15, 2);
             $table->enum('status', ['available', 'sold', 'reserved'])->default('available');
             $table->text('description')->nullable();
-            $table->decimal('x', 10, 6)->nullable();
-            $table->decimal('y', 10, 6)->nullable();
+            $table->text('position')->nullable();
             $table->timestamps();
 
             // Foreign Keys

@@ -18,8 +18,7 @@ class Lots extends Model
         'price',
         'status',
         'description',
-        'x',
-        'y',
+        'position',
     ];
 
     /**

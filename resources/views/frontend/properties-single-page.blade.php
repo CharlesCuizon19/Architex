@@ -28,7 +28,7 @@
         <!-- 🟢 Tabs Section -->
         <section class="pt-10 pb-[20rem] px-4 sm:px-6 lg:px-8" x-data="{
             tabs: @js($tabs),
-            activeTab: 'Overview',
+            activeTab: 'Sitemap',
         }">
             <div class="mx-auto max-w-screen-2xl">
 
@@ -67,8 +67,10 @@
 
                 <!-- 🟢 Sitemap Tab -->
                 <div x-show="activeTab === 'Sitemap'" x-transition>
-                    <x-property.sitemap-view :lots="$lots" :property="$property" />
+                    <x-property.sitemap-view :lots="$lots" :property="$property" :floorplan="$lots" />
+                    {{-- <x-sitemap-interactive :lots="$lots" /> --}}
                 </div>
+
 
                 <!-- 🟢 Amenities Tab -->
                 <div x-show="activeTab === 'Amenities'" x-transition>

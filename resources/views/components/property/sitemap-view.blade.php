@@ -1,5 +1,6 @@
 @props([
     'lots' => [],
+    'floorplan' => [],
     'property' => [],
 ])
 
@@ -18,6 +19,7 @@
             description: lot.description,
             highlights: lot.highlights,
             house_details: lot.house_details,
+            position: lot.position,
         };
 
         this.$nextTick(() => {
@@ -33,7 +35,7 @@
 
     <!-- Sitemap Section -->
     <div x-show="activeTab === 'Sitemap'" x-transition>
-        <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
+        <div class="grid items-start grid-cols-1 gap-10 lg:grid-cols-2">
 
             <!-- Left Panel: Lot Info -->
             <div class="bg-white p-8 rounded-lg shadow-inner text-left max-h-[90vh] overflow-y-auto h-fit">
@@ -277,21 +279,24 @@
 
             <!-- Right Panel: Sitemap -->
             <div class="relative overflow-hidden">
-                <img src="{{ asset('img/properties/site-map.png') }}" alt="Sitemap"
-                    class="object-contain w-full h-auto">
+                <!-- Background Site Map Image -->
+                <img src="{{ asset('img/properties/sitemap.svg') }}" alt="Sitemap"
+                    class="object-contain w-full h-auto -rotate-6">
 
-                <!-- Clickable lots -->
+                <!-- Clickable Lots Overlay -->
                 <template x-for="(lot, index) in lots" :key="index">
-                    <div @click="selectLot(lot)"
-                        :class="[
-                            lot.color,
-                            'absolute w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold cursor-pointer transition transform hover:scale-110 '
-                        ]"
-                        :style="'top:' + (30 + index * 15) + '%; left:' + (35 + index * 10) + '%;'" x-text="lot.id">
-                    </div>
-
+                    <button @click="selectLot(lot)"
+                        class="absolute flex items-center justify-center w-6 h-6 text-sm font-semibold text-white transition transform shadow-lg hover:scale-110 hover:shadow-2xl focus:outline-none focus:ring-0 active:scale-100"
+                        :class="{
+                            'bg-transparent': lot.status === 'Sold',
+                            'bg-transparent': lot.status === 'Reserved',
+                            'bg-transparent': lot.status === 'Available'
+                        }"
+                        :style="lot.position" x-text="lot.id">
+                    </button>
                 </template>
             </div>
+
         </div>
     </div>
 </div>

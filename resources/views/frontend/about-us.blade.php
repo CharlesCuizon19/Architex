@@ -702,7 +702,7 @@
         </div>
     </section>
 
-    <div class="relative bg-[#f3f3f3] h-full border border-black pb-[20rem] pt-[10rem] md:pb-0 md:pt-0">
+    <div class="relative bg-[#f3f3f3] h-full pb-[20rem] pt-[10rem] md:pb-0 md:pt-0">
         <div class="flex items-center justify-center w-full">
             <div>
                 <img src="{{ asset('img/about-us/Architex Japan Logo.png') }}" alt=""
