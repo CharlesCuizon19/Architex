@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\BlogCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminUserSeeder::class,
+            BlogCategoriesSeeder::class,
+            PropertiesSeeder::class,
+            BlockSeeder::class,
         ]);
     }
 }

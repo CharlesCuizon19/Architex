@@ -19,7 +19,7 @@ class AdminUserSeeder extends Seeder
                 'name' => 'Administrator',
                 'email' => 'hello@rweb.solutions',
                 'password' => Hash::make('*'), // default password
-                'is_admin' => true, // if you have an is_admin column
+                'is_admin' => true,
             ]
         );
     }

@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LotCategory extends Model
+class LotsType extends Model
 {
     use HasFactory;
 
-    protected $table = 'lot_categories';
+    protected $table = 'lots_types';
 
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'int';
 
     protected $fillable = [
-        'title',
-        'subtitle',
-        'image',
+        'type_name',
     ];
+
+    public function lots()
+    {
+        return $this->hasMany(Lot::class, 'type_id');
+    }
 }

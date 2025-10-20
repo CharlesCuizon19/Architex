@@ -69,4 +69,21 @@
         /* Outline color */
         color: transparent;
     }
+
+    /* Softer modal fade-in */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(-8px) scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.25s ease-out;
+    }
 </style>

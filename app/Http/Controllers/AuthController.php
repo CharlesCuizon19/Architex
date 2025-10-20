@@ -23,6 +23,16 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $user = Auth::user();
+
+            // ✅ Check if user is admin
+            if (!$user->is_admin) {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'You are not authorized to access the admin dashboard.',
+                ])->onlyInput('email');
+            }
+
             $request->session()->regenerate();
 
             return redirect()->intended(route('admin.banners.index'))
@@ -33,6 +43,7 @@ class AuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
 
     /**
      * Logout the user
