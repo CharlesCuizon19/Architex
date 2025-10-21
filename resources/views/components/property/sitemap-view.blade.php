@@ -11,20 +11,25 @@
 
     selectLot(lot) {
         this.activeLot = {
-            ...lot,
-            name: lot.name,
-            address: lot.address,
-            type: lot.type,
-            category: lot.category,
-            description: lot.description,
-            highlights: lot.highlights,
-            house_details: lot.house_details,
-            position: lot.position,
+            ...{
+                id: lot.id ?? null,
+                name: lot.name ?? null,
+                address: lot.address ?? null,
+                type: lot.type ?? null,
+                category: lot.category ?? null,
+                description: lot.description ?? null,
+                highlights: lot.highlights ?? null,
+                house_details: lot.house_details ?? [],
+                position: lot.position ?? '',
+                size: lot.size ?? null,
+                price: lot.price ?? null,
+                status: lot.status ?? null,
+            }
         };
 
         this.$nextTick(() => {
-            if (galleryComponent && lot.house_details) {
-                galleryComponent.house_details = lot.house_details;
+            if (typeof galleryComponent !== 'undefined' && this.activeLot.house_details?.length) {
+                galleryComponent.house_details = this.activeLot.house_details;
                 galleryComponent.current = 0;
             }
         });
@@ -185,17 +190,17 @@
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <div class="p-4 bg-white border border-gray-200 rounded-md">
                                     <p class="mb-1 text-sm text-gray-600">Lot Area</p>
-                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot.size"></p>
+                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot?.size || 'N/A'"></p>
                                 </div>
 
                                 <div class="p-4 bg-white border border-gray-200 rounded-md">
                                     <p class="mb-1 text-sm text-gray-600">Type</p>
-                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot.category"></p>
+                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot?.category || 'N/A'"></p>
                                 </div>
 
                                 <div class="p-4 bg-white border border-gray-200 rounded-md">
                                     <p class="mb-1 text-sm text-gray-600">Price</p>
-                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot.price"></p>
+                                    <p class="text-xl font-semibold text-gray-800" x-text="activeLot?.price || 'N/A'"></p>
                                 </div>
 
                                 <div class="p-4 bg-white border border-gray-200 rounded-md">
@@ -206,18 +211,18 @@
                                             'text-yellow-600': activeLot.status === 'Reserved',
                                             'text-red-600': activeLot.status === 'Sold'
                                         }"
-                                        x-text="activeLot.status"></p>
+                                        x-text="activeLot?.status || 'N/A'"></p>
                                 </div>
                             </div>
 
                             <!-- Description -->
                             <div>
                                 <h3 class="mb-2 text-lg font-semibold text-gray-800">Description</h3>
-                                <p class="leading-relaxed text-gray-700" x-text="activeLot.description"></p>
+                                <p class="leading-relaxed text-gray-700" x-text="activeLot?.description || 'Information coming soon.'"></p>
                             </div>
                             <div>
                                 <h3 class="mb-2 text-lg font-semibold text-gray-800">Highlights</h3>
-                                <p class="leading-relaxed text-gray-700" x-text="activeLot.highlights"></p>
+                                <p class="leading-relaxed text-gray-700" x-text="activeLot?.highlights || 'Information coming soon.'"></p>
                             </div>
                         </div>
                     </template>
