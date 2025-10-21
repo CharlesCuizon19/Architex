@@ -34,21 +34,21 @@ class ContactUsController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'phone_number' => 'required|digits:11',
             'message' => 'required|string|max:1000',
         ]);
 
-        ContactUs::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'phone_number' => $validated['phone_number'],
-            'subject' => $validated['subject'],
-            'message' => $validated['message'],
-        ]);
+        ContactUs::create($validated);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Your contact has been submitted successfully']);
+        }
+
         return redirect()->back()->with('Success', 'Your contact has been submitted successfully');
     }
+
 
     /**
      * Display the specified resource.

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -57,71 +58,38 @@ class PageController extends Controller
     }
     public function blogs()
     {
+        $blogs = Blog::with('category')
+            ->orderBy('blog_date', 'desc')
+            ->get();
 
-        $blogs = [
-            (object) [
-                'id' => 1,
-                'image' => 'img/blogs-img1.png',
-                'category' => 'Materials',
-                'date' => '2025-01-10',
-                'title' => 'Steel Fabrication: Strength Behind Every Structure',
-            ],
-            (object) [
-                'id' => 2,
-                'image' => 'img/blogs-img2.png',
-                'category' => 'Architect',
-                'date' => '2025-01-10',
-                'title' => 'Smart Spaces: The Future of Modern Living',
-            ],
-            (object) [
-                'id' => 3,
-                'image' => 'img/blogs-img3.png',
-                'category' => 'Design',
-                'date' => '2025-01-10',
-                'title' => 'Designing Exteriors that Inspire Productivity',
-            ],
-        ];
         return view('frontend.blogs', compact('blogs'));
     }
+
     public function contactUs()
     {
         return view('frontend.contact-us');
     }
     public function blog_Details($id)
     {
-        $blogs = [
-            (object) [
-                'id' => 1,
-                'image' => 'img/blogs-img1.png',
-                'category' => 'Materials',
-                'date' => '2025-01-12',
-                'title' => 'Steel Fabrication: Strength Behind Every Structure',
-                'context' => 'In recent years, technology has rapidly transformed every aspect of our lives—from how we communicate, to how we work, to how we spend our leisure time. One of the most significant changes has taken place in our homes and communities, where innovation is redefining the very concept of living. Smart spaces are at the heart of this transformation, offering a new era of comfort, convenience, sustainability, and security.',
-            ],
-            (object) [
-                'id' => 2,
-                'image' => 'img/blogs-img2.png',
-                'category' => 'Architect',
-                'date' => '2025-02-17',
-                'title' => 'Smart Spaces: The Future of Modern Living',
-                'context' => 'In recent years, technology has rapidly transformed every aspect of our lives—from how we communicate, to how we work, to how we spend our leisure time. One of the most significant changes has taken place in our homes and communities, where innovation is redefining the very concept of living. Smart spaces are at the heart of this transformation, offering a new era of comfort, convenience, sustainability, and security.',
-            ],
-            (object) [
-                'id' => 3,
-                'image' => 'img/blogs-img3.png',
-                'category' => 'Design',
-                'date' => '2025-05-12',
-                'title' => 'Designing Exteriors that Inspire Productivity',
-                'context' => 'In recent years, technology has rapidly transformed every aspect of our lives—from how we communicate, to how we work, to how we spend our leisure time. One of the most significant changes has taken place in our homes and communities, where innovation is redefining the very concept of living. Smart spaces are at the heart of this transformation, offering a new era of comfort, convenience, sustainability, and security.',
-            ],
-        ];
+        // Get the current blog with category
+        $blog = Blog::with('category')->findOrFail($id);
 
-        $blog = collect($blogs)->firstWhere('id', $id);
-        $recentBlogs = collect($blogs)->sortByDesc('date')->where('id', '!=', $id)->take(3);
-        $blogs = collect($blogs)->sortByDesc('date')->where('id', '!=', $id);
+        // Get recent 3 blogs excluding the current one
+        $recentBlogs = Blog::with('category')
+            ->where('id', '!=', $id)
+            ->orderBy('blog_date', 'desc')
+            ->take(3)
+            ->get();
+
+        // Get all blogs except current (for the “You Might Also Like” swiper)
+        $blogs = Blog::with('category')
+            ->where('id', '!=', $id)
+            ->orderBy('blog_date', 'desc')
+            ->get();
 
         return view('frontend.blog-single-page', compact('blog', 'recentBlogs', 'blogs'));
     }
+
 
     public function propertiesSinglePage($id)
     {

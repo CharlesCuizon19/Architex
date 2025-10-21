@@ -118,7 +118,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/admin/newsletter/" + inquireId, // ✅ singular
+                    url: "/admin/newsletters/" + inquireId, // ✅ singular
                     method: "POST",
                     data: {
                         _method: "DELETE",

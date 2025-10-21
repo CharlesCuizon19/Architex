@@ -12,7 +12,7 @@
     </div>
 
     <!-- Newsletter -->
-    <div class="max-w-screen-xl mx-auto -mt-52 ">
+    <div class="max-w-screen-xl mx-auto -mt-52">
         <div
             class="bg-[#253e16] text-white shadow-lg flex flex-col-reverse md:grid md:grid-cols-2 gap-0 items-stretch overflow-hidden">
             <!-- Text -->
@@ -22,16 +22,20 @@
                     From project highlights and innovative solutions to company news and industry trends,
                     our newsletter keeps you updated on everything that shapes the future of modern spaces.
                 </p>
-                <!-- Wider form -->
-                <form class="flex w-full gap-1 lg:w-full">
-                    <input type="email" placeholder="Enter your email address"
-                        class="w-full py-4 px-3 text-black focus:outline-none placeholder:text-[#253e16]">
+
+                <!-- Newsletter Form (AJAX version) -->
+                <form id="newsletterForm" class="flex w-full gap-1 lg:w-full">
+                    @csrf
+                    <input type="email" id="newsletterEmail" name="email" placeholder="Enter your email address" required
+                        class="w-full py-4 px-3 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#253e16]">
+
                     <button type="submit"
-                        class="text-nowrap px-6 py-3 bg-[#ffd601] hover:bg-yellow-500 text-[#253e16]">
+                        class="text-nowrap px-6 py-3 bg-[#ffd601] hover:bg-yellow-500 text-[#253e16] rounded-md transition">
                         Subscribe Now
                     </button>
                 </form>
             </div>
+
             <!-- Full Image -->
             <div class="flex items-end justify-end max-h-[25rem]">
                 <img src="{{ asset('img/footer/newsletter.png') }}" alt="Newsletter"
@@ -45,7 +49,7 @@
 
         <!-- Logo + Socials -->
         <div class="flex flex-col items-center justify-between md:flex-row md:items-start">
-            <img src="img/footer/logo.png" alt="Logo" class="h-10 mb-6 md:mb-0">
+            <img src="{{ asset('img/footer/logo.png') }}" alt="Logo" class="h-10 mb-6 md:mb-0">
             <div class="flex space-x-4">
                 <a href="#" class="transition hover:opacity-80">
                     <img src="{{ asset('img/footer/fb.png') }}" alt="Facebook" class="w-10 h-10">
@@ -69,24 +73,12 @@
             <div>
                 <h3 class="mb-4 text-2xl font-bold text-black">QUICK LINKS</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('homepage') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Home</a></li>
-                    <li><a href="{{ route('about-us') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            About Us</a></li>
-                    <li><a href="{{ route('properties.show') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Properties</a></li>
-                    <li><a href="{{ route('services') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Services</a></li>
-                    <li><a href="{{ route('blogs.show') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Blogs</a></li>
-                    <li><a href="{{ route('contactUs') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Contact Us</a></li>
+                    <li><a href="{{ route('homepage') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Home</a></li>
+                    <li><a href="{{ route('about-us') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› About Us</a></li>
+                    <li><a href="{{ route('properties.show') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Properties</a></li>
+                    <li><a href="{{ route('services') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Services</a></li>
+                    <li><a href="{{ route('blogs.show') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Blogs</a></li>
+                    <li><a href="{{ route('contactUs') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Contact Us</a></li>
                 </ul>
             </div>
 
@@ -94,9 +86,7 @@
             <div>
                 <h3 class="mb-4 text-2xl font-bold text-black">PROPERTIES</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('properties.show') }}"
-                            class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">›
-                            Apo Yama Residences</a></li>
+                    <li><a href="{{ route('properties.show') }}" class="flex items-center gap-2 text-lg font-semibold hover:text-green-700">› Apo Yama Residences</a></li>
                 </ul>
             </div>
 
@@ -132,10 +122,56 @@
                 <a href="#" class="hover:underline">Terms & Conditions</a>
                 <a href="#" class="hover:underline">Privacy Policy</a>
             </div>
-            <a href="https://rwebsolutions.com.ph/" class="mt-2 md:mt-0">© Architex Phil, Inc. 2025. Designed and
-                Developed by
+            <a href="https://rwebsolutions.com.ph/" class="mt-2 md:mt-0">
+                © Architex Phil, Inc. 2025. Designed and Developed by
                 <span class="text-[#ff6200] font-semibold">R Web Solutions Corp.</span>
             </a>
         </div>
     </div>
 </footer>
+
+<!-- ✅ SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- ✅ AJAX Script -->
+<script>
+document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('newsletterEmail').value;
+    const csrfToken = document.querySelector('input[name="_token"]').value;
+
+    fetch("{{ route('newsletter.store') }}", {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(response => {
+        if (response.ok) return response.json();
+        return response.text().then(text => { throw new Error(text) });
+    })
+    .then(data => {
+        Swal.fire({
+            title: 'Subscribed!',
+            text: 'Your email has been successfully added to our newsletter!',
+            icon: 'success',
+            confirmButtonColor: '#253e16',
+            confirmButtonText: 'OK'
+        });
+        document.getElementById('newsletterForm').reset();
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Oops!',
+            text: 'Please enter a valid email address or try again later.',
+            icon: 'error',
+            confirmButtonColor: '#253e16',
+            confirmButtonText: 'Try Again'
+        });
+    });
+});
+</script>

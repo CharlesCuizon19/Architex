@@ -43,6 +43,8 @@ Route::get('/properties/property-details/{id}', [PageController::class, 'propert
 Route::get('/rentals', [PageController::class, 'rentals'])->name('rentals');
 Route::get('/rentals/rental-details/{id}', [PageController::class, 'rentalDetails'])->name('rental-details');
 
+Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
+Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contacts.store');
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {

@@ -39,8 +39,16 @@ class NewsletterController extends Controller
         Newsletter::create([
             'email' => $validated['email'],
         ]);
+
+        // ✅ If it's an AJAX request, return JSON
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Subscribed successfully!']);
+        }
+
+        // fallback (in case of direct form submit)
         return redirect()->back()->with('Success', 'Your contact has been submitted successfully');
     }
+
 
     /**
      * Display the specified resource.
