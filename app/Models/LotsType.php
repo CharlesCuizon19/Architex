@@ -21,6 +21,6 @@ class LotsType extends Model
 
     public function lots()
     {
-        return $this->hasMany(Lot::class, 'type_id');
+        return $this->hasMany(Lots::class, 'type_id');
     }
 }

@@ -92,4 +92,10 @@
     .animate-fade-in {
         animation: fade-in 0.25s ease-out;
     }
+
+    .map-container {
+        width: 100%;
+        height: 600px;
+        position: relative;
+    }
 </style>

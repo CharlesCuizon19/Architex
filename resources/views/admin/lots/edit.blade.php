@@ -13,8 +13,7 @@
         {{-- Block --}}
         <div>
             <label for="block_id" class="block text-sm font-medium text-gray-700">Block</label>
-            <select name="block_id" id="block_id"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+            <select name="block_id" id="block_id" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
                 <option value="">Select Block</option>
                 @foreach($blocks as $block)
                 <option value="{{ $block->id }}" {{ old('block_id', $lot->block_id) == $block->id ? 'selected' : '' }}>
@@ -28,8 +27,7 @@
         {{-- Category --}}
         <div>
             <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
-            <select name="category_id" id="category_id"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+            <select name="category_id" id="category_id" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
                 <option value="">Select Category</option>
                 @foreach($categories as $cat)
                 <option value="{{ $cat->id }}" {{ old('category_id', $lot->category_id) == $cat->id ? 'selected' : '' }}>
@@ -43,8 +41,7 @@
         {{-- Type --}}
         <div>
             <label for="type_id" class="block text-sm font-medium text-gray-700">Type</label>
-            <select name="type_id" id="type_id"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+            <select name="type_id" id="type_id" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
                 <option value="">Select Type</option>
                 @foreach($types as $type)
                 <option value="{{ $type->id }}" {{ old('type_id', $lot->type_id) == $type->id ? 'selected' : '' }}>
@@ -58,9 +55,7 @@
         {{-- Lot Name --}}
         <div>
             <label for="lot_name" class="block text-sm font-medium text-gray-700">Lot Name</label>
-            <input type="text" name="lot_name" id="lot_name"
-                value="{{ old('lot_name', $lot->lot_name) }}"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+            <input type="text" name="lot_name" id="lot_name" value="{{ old('lot_name', $lot->lot_name) }}" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
             @error('lot_name') <div class="text-red-600 text-sm">{{ $message }}</div> @enderror
         </div>
 
@@ -68,23 +63,18 @@
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label for="area" class="block text-sm font-medium text-gray-700">Area (sqm)</label>
-                <input type="number" name="area" id="area"
-                    value="{{ old('area', $lot->area) }}"
-                    class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+                <input type="number" name="area" id="area" value="{{ old('area', $lot->area) }}" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div>
                 <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                <input type="number" name="price" id="price"
-                    value="{{ old('price', $lot->price) }}"
-                    class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
+                <input type="number" name="price" id="price" value="{{ old('price', $lot->price) }}" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500" required>
             </div>
         </div>
 
         {{-- Status --}}
         <div>
             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-            <select name="status" id="status"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500">
+            <select name="status" id="status" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500">
                 @foreach(['available', 'sold', 'reserved'] as $status)
                 <option value="{{ $status }}" {{ old('status', $lot->status) == $status ? 'selected' : '' }}>
                     {{ ucfirst($status) }}
@@ -96,42 +86,67 @@
         {{-- Description --}}
         <div>
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-            <textarea name="description" id="description" rows="6"
-                class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500">{{ old('description', $lot->description) }}</textarea>
+            <textarea name="description" id="description" rows="6" class="mt-1 block w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500">{{ old('description', $lot->description) }}</textarea>
         </div>
 
-        {{-- Upload Multiple Images --}}
+        {{-- Lot Images Upload --}}
         <div class="border-2 border-dashed rounded-lg p-6 text-center mt-6">
             <p class="font-semibold">Lot Gallery</p>
             <p class="text-sm text-gray-500 mb-4">Upload multiple lot images (JPG, PNG, WEBP, Max: 2MB each)</p>
             <label class="cursor-pointer inline-flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-2" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 15a4 4 0 014-4h.586a1 1 0 01.707.293l2.414 2.414a1 1 0 001.414 0l2.414-2.414a1 1 0 01.707-.293H17a4 4 0 014 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1z" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 014-4h.586a1 1 0 01.707.293l2.414 2.414a1 1 0 001.414 0l2.414-2.414a1 1 0 01.707-.293H17a4 4 0 014 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1z" />
                 </svg>
-                <span class="text-gray-600">Click below or drag files to upload</span>
+                <span class="text-gray-600">Click or drag files to upload</span>
                 <input type="file" name="images[]" id="lot_images" class="hidden" accept="image/*" multiple>
                 <span class="mt-3 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded cursor-pointer">Upload Images</span>
             </label>
         </div>
 
-        {{-- New Images Preview --}}
+        {{-- Lot Images Preview --}}
         <div id="new-images-container" class="flex flex-wrap gap-4 mt-4 hidden"></div>
 
-        {{-- Existing Images --}}
-        @if($lot->images->count() > 0)
+        {{-- Existing Lot Images --}}
+        @if($lot->images && $lot->images->count() > 0)
         <div class="mt-6">
             <p class="font-semibold mb-2">Existing Images</p>
             <div class="flex flex-wrap gap-4">
                 @foreach($lot->images as $img)
                 <div class="relative inline-block" id="existing-image-{{ $img->id }}">
                     <img src="{{ asset($img->image) }}" class="w-40 h-28 object-cover rounded shadow">
-                    <button type="button"
-                        class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition"
-                        onclick="removeExistingImage({{ $img->id }})">
-                        ✖
-                    </button>
+                    <button type="button" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition" onclick="removeExistingImage({{ $img->id }})">✖</button>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        {{-- Floor Plan Images Upload --}}
+        <div class="border-2 border-dashed rounded-lg p-6 text-center mt-6">
+            <p class="font-semibold">Floor Plan Gallery</p>
+            <p class="text-sm text-gray-500 mb-4">Upload multiple floor plan images (JPG, PNG, WEBP, Max: 2MB each)</p>
+            <label class="cursor-pointer inline-flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 014-4h.586a1 1 0 01.707.293l2.414 2.414a1 1 0 001.414 0l2.414-2.414a1 1 0 01.707-.293H17a4 4 0 014 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1z" />
+                </svg>
+                <span class="text-gray-600">Click or drag files to upload</span>
+                <input type="file" name="floor_plan[]" id="floor_plan" class="hidden" accept="image/*" multiple>
+                <span class="mt-3 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded cursor-pointer">Upload Floor Plans</span>
+            </label>
+        </div>
+
+        {{-- Floor Plan Preview --}}
+        <div id="floorplan-preview-container" class="flex flex-wrap gap-4 mt-4 hidden"></div>
+
+        {{-- Existing Floor Plan Images --}}
+        @if($lot->floor_plan && $lot->floor_plan->count() > 0)
+        <div class="mt-6">
+            <p class="font-semibold mb-2">Existing Floor Plans</p>
+            <div class="flex flex-wrap gap-4">
+                @foreach($lot->floor_plan as $fp)
+                <div class="relative inline-block" id="existing-floorplan-{{ $fp->id }}">
+                    <img src="{{ asset($fp->floor_plan) }}" class="w-40 h-28 object-cover rounded shadow">
+                    <button type="button" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition" onclick="removeExistingFloorPlan({{ $fp->id }})">✖</button>
                 </div>
                 @endforeach
             </div>
@@ -151,20 +166,18 @@
 <script>
     ClassicEditor.create(document.querySelector('#description')).catch(console.error);
 
-    const multiInput = document.getElementById('lot_images');
+    // Lot Images Preview
+    const lotImagesInput = document.getElementById('lot_images');
     const newImagesContainer = document.getElementById('new-images-container');
-
-    multiInput?.addEventListener('change', function(e) {
+    lotImagesInput?.addEventListener('change', function(e) {
         newImagesContainer.innerHTML = '';
         Array.from(e.target.files).forEach(file => {
             const reader = new FileReader();
             reader.onload = function(ev) {
                 const div = document.createElement('div');
                 div.classList.add('relative', 'inline-block');
-                div.innerHTML = `
-                <img src="${ev.target.result}" class="w-40 h-28 object-cover rounded shadow">
-                <button type="button" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition">✖</button>
-            `;
+                div.innerHTML = `<img src="${ev.target.result}" class="w-40 h-28 object-cover rounded shadow">
+                <button type="button" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition">✖</button>`;
                 div.querySelector('button').addEventListener('click', () => div.remove());
                 newImagesContainer.appendChild(div);
             }
@@ -173,12 +186,44 @@
         newImagesContainer.classList.remove('hidden');
     });
 
+    // Floor Plan Preview
+    const floorPlanInput = document.getElementById('floor_plan');
+    const floorPlanContainer = document.getElementById('floorplan-preview-container');
+    floorPlanInput?.addEventListener('change', function(e) {
+        floorPlanContainer.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const div = document.createElement('div');
+                div.classList.add('relative', 'inline-block');
+                div.innerHTML = `<img src="${ev.target.result}" class="w-40 h-28 object-cover rounded shadow">
+                <button type="button" class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg hover:bg-red-700 transition">✖</button>`;
+                div.querySelector('button').addEventListener('click', () => div.remove());
+                floorPlanContainer.appendChild(div);
+            }
+            reader.readAsDataURL(file);
+        });
+        floorPlanContainer.classList.remove('hidden');
+    });
+
+    // Remove existing lot images
     function removeExistingImage(id) {
         const imgDiv = document.getElementById(`existing-image-${id}`);
         if (imgDiv) imgDiv.remove();
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'remove_images[]';
+        input.value = id;
+        document.querySelector('form').appendChild(input);
+    }
+
+    // Remove existing floor plans
+    function removeExistingFloorPlan(id) {
+        const div = document.getElementById(`existing-floorplan-${id}`);
+        if (div) div.remove();
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'remove_floorplans[]';
         input.value = id;
         document.querySelector('form').appendChild(input);
     }

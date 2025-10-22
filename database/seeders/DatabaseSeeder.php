@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             BlogCategoriesSeeder::class,
             PropertiesSeeder::class,
             BlockSeeder::class,
+            LotsCategoriesSeeder::class,
+            LotsTypeSeeder::class,
+            LotsSeeder::class,
         ]);
     }
 }

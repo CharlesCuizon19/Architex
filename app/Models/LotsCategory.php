@@ -21,6 +21,6 @@ class LotsCategory extends Model
 
     public function lots()
     {
-        return $this->hasMany(Lot::class, 'category_id');
+        return $this->hasMany(Lots::class, 'category_id');
     }
 }

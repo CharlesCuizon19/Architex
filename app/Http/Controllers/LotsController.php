@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lots;
 use App\Models\Block;
 use App\Models\LotsCategory;
+use App\Models\LotsFloorPlan;
 use App\Models\LotsType;
 use App\Models\LotsImage;
 use Illuminate\Http\Request;
@@ -41,50 +42,52 @@ class LotsController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('Lots store method called', ['request' => $request->all()]);
+        $validated = $request->validate([
+            'block_id'    => 'required|exists:blocks,id',
+            'category_id' => 'required|exists:lots_categories,id',
+            'type_id'     => 'required|exists:lots_types,id',
+            'lot_name'    => 'required|string|max:255',
+            'area'        => 'required|numeric|min:0',
+            'price'       => 'required|numeric|min:0',
+            'status'      => 'required|in:available,sold,reserved',
+            'description' => 'nullable|string',
+            'x'           => 'nullable|numeric',
+            'y'           => 'nullable|numeric',
+            'images.*'    => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+            'floor_plan.*' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
+        ]);
 
-        try {
-            $validated = $request->validate([
-                'block_id'    => 'required|exists:blocks,id',
-                'category_id' => 'required|exists:lots_categories,id',
-                'type_id'     => 'required|exists:lots_types,id',
-                'lot_name'    => 'required|string|max:255',
-                'area'        => 'required|numeric|min:0',
-                'price'       => 'required|numeric|min:0',
-                'status'      => 'required|in:available,sold,reserved',
-                'description' => 'nullable|string',
-                'x'           => 'nullable|numeric',
-                'y'           => 'nullable|numeric',
-                'images.*'    => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
-            ]);
+        $lot = Lots::create($validated);
 
-            $lot = Lots::create($validated);
+        // Save images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('storage/lots'), $filename);
 
-            // ✅ Handle multiple images
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $file) {
-                    $filename = time() . '_' . $file->getClientOriginalName();
-                    $file->move(public_path('storage/lots'), $filename);
-
-                    LotsImage::create([
-                        'lots_id'    => $lot->id,
-                        'image' => 'storage/lots/' . $filename,
-                    ]);
-                }
-                Log::info('Lot images uploaded successfully', ['lot_id' => $lot->id]);
+                LotsImage::create([
+                    'lots_id' => $lot->id,
+                    'image'   => 'storage/lots/' . $filename,
+                ]);
             }
-
-            return redirect()
-                ->route('admin.lots.index')
-                ->with('success', 'Lot created successfully.');
-        } catch (\Exception $e) {
-            Log::error('Error storing lot', [
-                'message' => $e->getMessage(),
-                'trace'   => $e->getTraceAsString(),
-            ]);
-            return back()->with('error', 'Something went wrong. Please check logs.');
         }
+
+        // Save floor plans
+        if ($request->hasFile('floor_plan')) {
+            foreach ($request->file('floor_plan') as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('storage/floorplan'), $filename);
+
+                LotsFloorPlan::create([
+                    'lots_id' => $lot->id,
+                    'floor_plan'   => 'storage/floorplan/' . $filename,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.lots.index')->with('success', 'Lot created successfully.');
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -110,33 +113,64 @@ class LotsController extends Controller
 
         try {
             $validated = $request->validate([
-                'block_id'    => 'required|exists:blocks,id',
-                'category_id' => 'required|exists:lots_categories,id',
-                'type_id'     => 'required|exists:lots_types,id',
-                'lot_name'    => 'required|string|max:255',
-                'area'        => 'required|numeric|min:0',
-                'price'       => 'required|numeric|min:0',
-                'status'      => 'required|in:available,sold,reserved',
-                'description' => 'nullable|string',
-                'x'           => 'nullable|numeric',
-                'y'           => 'nullable|numeric',
-                'images.*'    => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+                'block_id'     => 'required|exists:blocks,id',
+                'category_id'  => 'required|exists:lots_categories,id',
+                'type_id'      => 'required|exists:lots_types,id',
+                'lot_name'     => 'required|string|max:255',
+                'area'         => 'required|numeric|min:0',
+                'price'        => 'required|numeric|min:0',
+                'status'       => 'required|in:available,sold,reserved',
+                'description'  => 'nullable|string',
+                'x'            => 'nullable|numeric',
+                'y'            => 'nullable|numeric',
+                'images.*'     => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+                'floor_plan.*' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
+                'remove_images' => 'nullable|array',
             ]);
 
+            // Update lot details
             $lot->update($validated);
 
-            // ✅ Add new images (keep old ones)
+            // Remove images marked for deletion
+            if ($request->filled('remove_images')) {
+                foreach ($request->remove_images as $imgId) {
+                    $img = LotsImage::find($imgId);
+                    if ($img) {
+                        if (file_exists(public_path($img->image))) {
+                            unlink(public_path($img->image));
+                        }
+                        $img->delete();
+                    }
+                }
+                Log::info('Removed selected images', ['lot_id' => $lot->id]);
+            }
+
+            // Add new lot images
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $file) {
                     $filename = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path('storage/lots'), $filename);
 
                     LotsImage::create([
-                        'lots_id'    => $lot->id,
-                        'image_path' => 'storage/lots/' . $filename,
+                        'lots_id' => $lot->id,
+                        'image'   => 'storage/lots/' . $filename,
                     ]);
                 }
                 Log::info('New images added to lot', ['lot_id' => $lot->id]);
+            }
+
+            // Add new floor plans
+            if ($request->hasFile('floor_plan')) {
+                foreach ($request->file('floor_plan') as $file) {
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('storage/floorplan'), $filename);
+
+                    LotsFloorPlan::create([
+                        'lots_id' => $lot->id,
+                        'floor_plan'   => 'storage/floorplan/' . $filename,
+                    ]);
+                }
+                Log::info('New floor plans added', ['lot_id' => $lot->id]);
             }
 
             return redirect()->route('admin.lots.index')->with('success', 'Lot updated successfully.');
@@ -149,6 +183,7 @@ class LotsController extends Controller
             return back()->with('error', 'Something went wrong during update.');
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

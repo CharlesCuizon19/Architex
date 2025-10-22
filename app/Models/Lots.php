@@ -47,4 +47,15 @@ class Lots extends Model
     {
         return $this->hasMany(LotsImage::class, 'lots_id');
     }
+
+    public function floor_plan()
+    {
+        return $this->hasMany(LotsFloorPlan::class, 'lots_id');
+    }
+
+    // A lot has one payment
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'lot_id');
+    }
 }

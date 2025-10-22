@@ -104,21 +104,46 @@
 
 
                 <!-- STEP 1 -->
-                <div x-show="step === 1 && !paymentSuccess " x-transition
+                <!-- STEP 1 -->
+                <div x-show="step === 1 && !paymentSuccess" x-transition
                     class="p-6 space-y-6 overflow-y-auto max-h-[80vh]">
+
                     <!-- Lot Details -->
-                    <div>
+                    <div x-show="activeLot" x-transition>
                         <div class="bg-[#d3e3d5] text-[#1E4D2B] px-4 py-2 font-semibold rounded-t-md">
                             Lot Details
                         </div>
                         <div class="flex gap-4 p-4 border rounded-b-md">
-                            <img src="{{ asset($property['house']) }}" alt="Property" class="object-cover w-32 h-32">
+                            <img
+                                x-show="activeLot"
+                                :src="activeLot?.house_details?.length 
+        ? activeLot.house_details[0] 
+        : '{{ asset($property['house'] ?? 'img/default-house.jpg') }}'"
+                                alt="Property"
+                                class="object-cover w-32 h-32 rounded-md transition-all duration-500 ease-in-out" />
+
                             <div class="space-y-1 text-sm">
-                                <h3 class="font-bold text-lg text-[#1E4D2B]">SANDERIANA</h3>
-                                <p>Lot Selected: Block 5 Lot 12</p>
-                                <p>Lot Area: 120 sqm</p>
-                                <p>Type: Residential</p>
-                                <p class="font-semibold">Price: ₱1,200,000.00</p>
+                                <h3 class="font-bold text-lg text-[#1E4D2B]" x-text="activeLot.name ?? 'No Lot Selected'"></h3>
+                                <p>
+                                    Lot Selected:
+                                    <span x-text="activeLot.address ?? '-'"></span>
+
+                                </p>
+                                <p>Lot Area: <span x-text="`${activeLot.size ?? 0}`"></span></p>
+                                <p>Type: <span x-text="activeLot.type ?? 'N/A'"></span></p>
+                                <p class="font-semibold">
+                                    <span x-text="activeLot.price && !isNaN(Number(activeLot.price))
+                                        ? `Price: ₱${Number(activeLot.price).toLocaleString()}`
+                                        : (activeLot.price ? `Price: ${activeLot.price}` : 'Price: N/A')">
+                                    </span>
+                                </p>
+                                <p>Status:
+                                    <span :class="{
+                        'text-green-700 font-semibold': activeLot.status === 'Available',
+                        'text-yellow-500 font-semibold': activeLot.status === 'Reserved',
+                        'text-red-600 font-semibold': activeLot.status === 'Sold'
+                        " x-text="activeLot.status ?? 'Unknown'"></span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -157,6 +182,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Step 1 Footer -->
                 <div x-show="step === 1 && !paymentSuccess" x-transition

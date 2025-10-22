@@ -34,6 +34,8 @@
                 <th class="px-6 py-3 w-1/5 text-center">Type</th>
                 <th class="px-6 py-3 w-1/5 text-center">Area (sqm)</th>
                 <th class="px-6 py-3 w-1/5 text-center">Price (₱)</th>
+                <th class="px-6 py-3 w-1/5 text-center">Images</th>
+                <th class="px-6 py-3 w-1/5 text-center">Floor Plans</th>
                 <th class="px-6 py-3 w-1/5 text-center">Status</th>
                 <th class="px-6 py-3 rounded-tr-lg text-center whitespace-nowrap w-40">Actions</th>
             </tr>
@@ -48,15 +50,55 @@
                 <td class="px-6 py-3">{{ $lot->type?->type_name ?? 'N/A' }}</td>
                 <td class="px-6 py-3">{{ number_format($lot->area, 2) }}</td>
                 <td class="px-6 py-3">₱{{ number_format($lot->price, 2) }}</td>
+
+                <!-- 🖼️ Lot Images Column -->
+                <td class="px-6 py-3">
+                    @if($lot->images && $lot->images->count() > 0)
+                    <div class="flex justify-center items-center gap-1">
+                        @foreach($lot->images->take(1) as $image)
+                        <img src="{{ asset($image->image) }}"
+                            alt="Lot Image"
+                            class="w-10 h-10 object-cover rounded-md border">
+                        @endforeach
+                        @if($lot->images->count() > 1)
+                        <span class="text-xs text-gray-500">+{{ $lot->images->count() - 1 }}</span>
+                        @endif
+                    </div>
+                    @else
+                    <span class="text-gray-400 text-xs italic">No images</span>
+                    @endif
+                </td>
+
+                <!-- 🖼️ Floor Plan Column -->
+                <td class="px-6 py-3">
+                    @if($lot->floor_plan && $lot->floor_plan->count() > 0)
+                    <div class="flex justify-center items-center gap-1">
+                        @foreach($lot->floor_plan->take(1) as $fp)
+                        <img src="{{ asset($fp->floor_plan) }}"
+                            alt="Floor Plan"
+                            class="w-10 h-10 object-cover rounded-md border">
+                        @endforeach
+                        @if($lot->floor_plan->count() > 1)
+                        <span class="text-xs text-gray-500">+{{ $lot->floor_plan->count() - 1 }}</span>
+                        @endif
+                    </div>
+                    @else
+                    <span class="text-gray-400 text-xs italic">No floor plan</span>
+                    @endif
+                </td>
+
+
+                <!-- 🟢 Status Column -->
                 <td class="px-6 py-3">
                     <span class="px-3 py-1 rounded-full text-xs font-semibold
-                        @if($lot->status == 'available') bg-green-100 text-green-800
-                        @elseif($lot->status == 'sold') bg-red-100 text-red-800
-                        @else bg-yellow-100 text-yellow-800 @endif">
+            @if($lot->status == 'available') bg-green-100 text-green-800
+            @elseif($lot->status == 'sold') bg-red-100 text-red-800
+            @else bg-yellow-100 text-yellow-800 @endif">
                         {{ ucfirst($lot->status) }}
                     </span>
                 </td>
 
+                <!-- ⚙️ Actions -->
                 <td class="px-6 py-3 whitespace-nowrap">
                     <div class="flex justify-center items-center gap-2">
                         <a href="{{ route('admin.lots.edit', $lot->id) }}"
@@ -77,6 +119,7 @@
                     </div>
                 </td>
             </tr>
+
             @empty
             <tr>
                 <td colspan="9" class="py-6 text-center text-gray-500">No lots found.</td>
