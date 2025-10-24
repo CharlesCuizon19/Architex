@@ -24,7 +24,7 @@ class LotsSeeder extends Seeder
         }
 
         // ✅ Create 160 lots
-        foreach (range(1, 160) as $i) {
+        foreach (range(1, 147) as $i) {
             Lots::create([
                 'block_id'    => $blocks[array_rand($blocks)],
                 'category_id' => $categories[array_rand($categories)],

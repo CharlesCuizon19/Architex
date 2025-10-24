@@ -206,26 +206,45 @@
         floorPlanContainer.classList.remove('hidden');
     });
 
-    // Remove existing lot images
     function removeExistingImage(id) {
         const imgDiv = document.getElementById(`existing-image-${id}`);
         if (imgDiv) imgDiv.remove();
+
+        // Make sure we're appending to the correct form
+        const form = document.querySelector('form[action*="lots"]');
+        if (!form) {
+            console.error('Lot edit form not found');
+            return;
+        }
+
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'remove_images[]';
         input.value = id;
-        document.querySelector('form').appendChild(input);
+        form.appendChild(input);
+
+        console.log('Marked image for removal:', id);
     }
 
     // Remove existing floor plans
     function removeExistingFloorPlan(id) {
         const div = document.getElementById(`existing-floorplan-${id}`);
         if (div) div.remove();
+
+        // Ensure we append to the same correct form
+        const form = document.querySelector('form[action*="lots"]');
+        if (!form) {
+            console.error('Lot edit form not found');
+            return;
+        }
+
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'remove_floorplans[]';
         input.value = id;
-        document.querySelector('form').appendChild(input);
+        form.appendChild(input);
+
+        console.log('Marked floor plan for removal:', id);
     }
 </script>
 @endpush

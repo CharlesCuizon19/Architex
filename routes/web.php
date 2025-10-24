@@ -11,6 +11,7 @@ use App\Http\Controllers\LotsController;
 use App\Http\Controllers\LotTypesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PropertiesController;
 use App\Http\Controllers\ServiceController;
 use App\Models\BlogCategory;
@@ -45,6 +46,12 @@ Route::get('/rentals/rental-details/{id}', [PageController::class, 'rentalDetail
 
 Route::post('/newsletter', [NewsletterController::class, 'store'])->name('newsletter.store');
 Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contacts.store');
+
+Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+Route::get('/payments/success', [PaymentController::class, 'success'])->name('payments.success');
+Route::get('/payments/cancel', [PaymentController::class, 'cancel'])->name('payments.cancel');
+Route::post('/payments/webhook', [PaymentController::class, 'webhook'])->name('payments.webhook');
+
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {

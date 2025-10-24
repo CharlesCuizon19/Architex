@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lot_id');
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('contact_number');
+            $table->string('full_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('contact_number')->nullable();
             $table->string('telephone_number')->nullable();
+            $table->decimal('total', 12, 2)->nullable();
+            $table->decimal('amount_paid', 12, 2)->default(0);
             $table->string('payment_method');
             $table->enum('status', ['paid', 'unpaid', 'partial'])->default('unpaid');
+            $table->string('checkout_id')->nullable();
+            $table->string('checkout_url')->nullable();
             $table->timestamps();
 
-            // Foreign key constraint
             $table->foreign('lot_id')->references('id')->on('lots')->onDelete('cascade');
         });
     }

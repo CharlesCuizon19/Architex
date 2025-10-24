@@ -113,25 +113,28 @@ class LotsController extends Controller
 
         try {
             $validated = $request->validate([
-                'block_id'     => 'required|exists:blocks,id',
-                'category_id'  => 'required|exists:lots_categories,id',
-                'type_id'      => 'required|exists:lots_types,id',
-                'lot_name'     => 'required|string|max:255',
-                'area'         => 'required|numeric|min:0',
-                'price'        => 'required|numeric|min:0',
-                'status'       => 'required|in:available,sold,reserved',
-                'description'  => 'nullable|string',
-                'x'            => 'nullable|numeric',
-                'y'            => 'nullable|numeric',
-                'images.*'     => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
-                'floor_plan.*' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
+                'block_id'      => 'required|exists:blocks,id',
+                'category_id'   => 'required|exists:lots_categories,id',
+                'type_id'       => 'required|exists:lots_types,id',
+                'lot_name'      => 'required|string|max:255',
+                'area'          => 'required|numeric|min:0',
+                'price'         => 'required|numeric|min:0',
+                'status'        => 'required|in:available,sold,reserved',
+                'description'   => 'nullable|string',
+                'x'             => 'nullable|numeric',
+                'y'             => 'nullable|numeric',
+                'images.*'      => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
+                'floor_plan.*'  => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
                 'remove_images' => 'nullable|array',
+                'remove_floorplans' => 'nullable|array',
             ]);
 
             // Update lot details
             $lot->update($validated);
 
-            // Remove images marked for deletion
+            /** ----------------------------------------
+             *  REMOVE SELECTED IMAGES
+             * ---------------------------------------- */
             if ($request->filled('remove_images')) {
                 foreach ($request->remove_images as $imgId) {
                     $img = LotsImage::find($imgId);
@@ -145,7 +148,25 @@ class LotsController extends Controller
                 Log::info('Removed selected images', ['lot_id' => $lot->id]);
             }
 
-            // Add new lot images
+            /** ----------------------------------------
+             *  REMOVE SELECTED FLOOR PLANS
+             * ---------------------------------------- */
+            if ($request->filled('remove_floorplans')) {
+                foreach ($request->remove_floorplans as $fpId) {
+                    $fp = LotsFloorPlan::find($fpId);
+                    if ($fp) {
+                        if (file_exists(public_path($fp->floor_plan))) {
+                            unlink(public_path($fp->floor_plan));
+                        }
+                        $fp->delete();
+                    }
+                }
+                Log::info('Removed selected floor plans', ['lot_id' => $lot->id]);
+            }
+
+            /** ----------------------------------------
+             *  ADD NEW IMAGES
+             * ---------------------------------------- */
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $file) {
                     $filename = time() . '_' . $file->getClientOriginalName();
@@ -159,15 +180,17 @@ class LotsController extends Controller
                 Log::info('New images added to lot', ['lot_id' => $lot->id]);
             }
 
-            // Add new floor plans
+            /** ----------------------------------------
+             *  ADD NEW FLOOR PLANS
+             * ---------------------------------------- */
             if ($request->hasFile('floor_plan')) {
                 foreach ($request->file('floor_plan') as $file) {
                     $filename = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path('storage/floorplan'), $filename);
 
                     LotsFloorPlan::create([
-                        'lots_id' => $lot->id,
-                        'floor_plan'   => 'storage/floorplan/' . $filename,
+                        'lots_id'    => $lot->id,
+                        'floor_plan' => 'storage/floorplan/' . $filename,
                     ]);
                 }
                 Log::info('New floor plans added', ['lot_id' => $lot->id]);
@@ -180,10 +203,10 @@ class LotsController extends Controller
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
+
             return back()->with('error', 'Something went wrong during update.');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
