@@ -159,7 +159,7 @@
                         extending our reach globally.
                     </p>
 
-                    <a href="#"
+                    <a href="{{ route('about-us') }}"
                         class="inline-block bg-[#1E4D2B] text-white font-semibold px-6 py-3 rounded-md shadow-md hover:bg-[#256738] transition-all duration-300">
                         Learn More
                     </a>
