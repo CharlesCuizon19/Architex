@@ -20,7 +20,7 @@
                     <!-- Category & Date -->
                     <div class="relative flex justify-center">
                         <div
-                            class="absolute -top-5 bg-[#f3f3f3] text-[#253e16] text-sm px-2 py-3 flex items-center justify-between gap-2 shadow-lg w-[90%] max-w-md border border-gray-200 
+                            class="absolute -top-3 bg-[#f3f3f3] text-[#253e16] text-lg px-3 py-3 flex items-center justify-between gap-2 shadow-lg w-[90%] max-w-md border border-gray-200 
                             transition-all duration-300 group-hover:bg-[#253e16] group-hover:text-white group-hover:border-[#253e16]">
 
                             <!-- Category -->
